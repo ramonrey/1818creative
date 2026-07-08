@@ -1,0 +1,432 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const workEntries = await getCollection('work');
+  return workEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// Get related projects (same category, exclude current)
+const allWork = await getCollection('work');
+const relatedProjects = allWork
+  .filter(project => project.data.category === entry.data.category && project.slug !== entry.slug)
+  .slice(0, 3);
+---
+
+<Layout
+  title={`${entry.data.title} - 1818 Agency`}
+  description={entry.data.description}
+>
+  <Header />
+
+  <main class="project-page">
+    <!-- Hero Section -->
+    <section class="project-hero">
+      <div class="container">
+        <div class="breadcrumb">
+          <a href="/work">Our Work</a> / <span>{entry.data.title}</span>
+        </div>
+
+        <div class="project-header">
+          <div class="project-info">
+            <span class="project-category">{entry.data.category.split('-').join(' ')}</span>
+            <h1>{entry.data.title}</h1>
+            <p class="project-description">{entry.data.description}</p>
+
+            <div class="project-details">
+              {entry.data.client && (
+                <div class="detail">
+                  <span class="detail-label">Client</span>
+                  <span class="detail-value">{entry.data.client}</span>
+                </div>
+              )}
+              <div class="detail">
+                <span class="detail-label">Year</span>
+                <span class="detail-value">{entry.data.year}</span>
+              </div>
+              {entry.data.projectUrl && (
+                <div class="detail">
+                  <span class="detail-label">Website</span>
+                  <a href={entry.data.projectUrl} target="_blank" rel="noopener noreferrer" class="detail-link">
+                    View Live Site →
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {entry.data.tags && entry.data.tags.length > 0 && (
+              <div class="project-tags">
+                {entry.data.tags.map(tag => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Image -->
+    <section class="featured-image">
+      <div class="container">
+        <img src={entry.data.image} alt={entry.data.title} />
+      </div>
+    </section>
+
+    <!-- Project Content -->
+    <section class="project-content">
+      <div class="container">
+        <div class="content-wrapper">
+          <article class="prose">
+            <Content />
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonial -->
+    {entry.data.testimonial && (
+      <section class="testimonial-section">
+        <div class="container">
+          <div class="testimonial">
+            <svg class="quote-icon" width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M12 28C12 24.6863 14.6863 22 18 22C21.3137 22 24 24.6863 24 28C24 31.3137 21.3137 34 18 34C14.6863 34 12 31.3137 12 28ZM12 28V14M24 28C24 24.6863 26.6863 22 30 22C33.3137 22 36 24.6863 36 28C36 31.3137 33.3137 34 30 34C26.6863 34 24 31.3137 24 28ZM24 28V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <blockquote>{entry.data.testimonial}</blockquote>
+            {entry.data.client && <cite>— {entry.data.client}</cite>}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- Related Projects -->
+    {relatedProjects.length > 0 && (
+      <section class="related-projects">
+        <div class="container">
+          <h2>Related Projects</h2>
+          <div class="projects-grid">
+            {relatedProjects.map(project => (
+              <article class="project-card">
+                <a href={`/work/${project.slug}`}>
+                  <div class="project-image">
+                    <img src={project.data.image} alt={project.data.title} loading="lazy" />
+                    <div class="project-overlay">
+                      <span>View Project →</span>
+                    </div>
+                  </div>
+                  <div class="project-info">
+                    <h3>{project.data.title}</h3>
+                    <p>{project.data.description}</p>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+          <div class="view-all">
+            <a href="/work" class="btn btn-primary">View All Projects</a>
+          </div>
+        </div>
+      </section>
+    )}
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .project-page {
+    padding-top: 82px;
+  }
+
+  .project-hero {
+    padding: 4rem 0 2rem;
+    background: rgba(0, 0, 0, 0.02);
+  }
+
+  .breadcrumb {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    margin-bottom: 2rem;
+  }
+
+  .breadcrumb a {
+    color: var(--color-primary);
+    transition: var(--transition);
+  }
+
+  .breadcrumb a:hover {
+    opacity: 0.7;
+  }
+
+  .project-header {
+    max-width: 900px;
+  }
+
+  .project-category {
+    display: inline-block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .project-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+
+  .project-description {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .project-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .detail {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .detail-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-light);
+  }
+
+  .detail-value {
+    font-size: 1.125rem;
+    font-weight: 600;
+  }
+
+  .detail-link {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    transition: var(--transition);
+  }
+
+  .detail-link:hover {
+    opacity: 0.7;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .tag {
+    padding: 0.5rem 1rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    border-radius: 25px;
+    font-weight: 500;
+  }
+
+  .featured-image {
+    padding: 3rem 0;
+  }
+
+  .featured-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-content {
+    padding: 4rem 0;
+  }
+
+  .content-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .prose {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text);
+  }
+
+  .prose :global(h2) {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 2rem;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.75rem;
+  }
+
+  .testimonial-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  }
+
+  .testimonial {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .quote-icon {
+    color: var(--color-primary);
+    margin-bottom: 2rem;
+  }
+
+  .testimonial blockquote {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    color: var(--color-text);
+  }
+
+  .testimonial cite {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    font-style: normal;
+  }
+
+  .related-projects {
+    padding: 5rem 0;
+  }
+
+  .related-projects h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .project-card {
+    transition: var(--transition);
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .project-card a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-image {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--color-accent);
+    position: relative;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.125rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+  }
+
+  .view-all {
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .project-header h1 {
+      font-size: 2rem;
+    }
+
+    .project-description {
+      font-size: 1.125rem;
+    }
+
+    .testimonial blockquote {
+      font-size: 1.25rem;
+    }
+
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

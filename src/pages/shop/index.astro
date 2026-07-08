@@ -1,0 +1,233 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allProducts = await getCollection('shop');
+const featuredProducts = allProducts.filter(product => product.data.featured);
+---
+
+<Layout title="Digital Shop - 1818 Agency" description="Premium digital products for designers and developers">
+  <Header />
+
+  <main>
+    <section class="shop-hero section-dark">
+      <div class="container">
+        <h1>Digital Shop</h1>
+        <p>Premium templates, UI kits, and design resources to accelerate your projects</p>
+      </div>
+    </section>
+
+    {featuredProducts.length > 0 && (
+      <section class="featured-products section">
+        <div class="container">
+          <h2>Featured Products</h2>
+          <div class="products-grid">
+            {featuredProducts.map((product) => (
+              <article class="product-card featured">
+                <a href={`/shop/${product.slug}`}>
+                  <div class="product-image">
+                    <img src={product.data.image} alt={product.data.title} />
+                    <div class="product-overlay">
+                      <span class="view-details">View Details →</span>
+                    </div>
+                  </div>
+                  <div class="product-content">
+                    <div class="product-header">
+                      <h3>{product.data.title}</h3>
+                      <span class="product-price">${product.data.price}</span>
+                    </div>
+                    <p>{product.data.description}</p>
+                    <div class="product-tags">
+                      {product.data.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="all-products section">
+      <div class="container">
+        <h2>All Products</h2>
+        <div class="products-grid">
+          {allProducts.map((product) => (
+            <article class="product-card">
+              <a href={`/shop/${product.slug}`}>
+                <div class="product-image">
+                  <img src={product.data.image} alt={product.data.title} loading="lazy" />
+                  <div class="product-overlay">
+                    <span class="view-details">View Details →</span>
+                  </div>
+                </div>
+                <div class="product-content">
+                  <div class="product-header">
+                    <h3>{product.data.title}</h3>
+                    <span class="product-price">${product.data.price}</span>
+                  </div>
+                  <p>{product.data.description}</p>
+                  <span class="product-category">{product.data.category.replace('-', ' ')}</span>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .shop-hero {
+    padding: 8rem 0 4rem;
+    text-align: center;
+  }
+
+  .shop-hero h1 {
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .shop-hero p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.25rem;
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .product-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: var(--transition);
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+  }
+
+  .product-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--color-accent);
+    position: relative;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .product-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .product-card:hover .product-overlay {
+    opacity: 1;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .view-details {
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .product-content {
+    padding: 1.5rem;
+  }
+
+  .product-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .product-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    flex: 1;
+  }
+
+  .product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    white-space: nowrap;
+  }
+
+  .product-card p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .product-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+  }
+
+  .product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+  }
+
+  .product-card.featured {
+    border: 2px solid var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .shop-hero {
+      padding: 6rem 0 3rem;
+    }
+
+    .products-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

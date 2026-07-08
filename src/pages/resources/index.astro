@@ -1,0 +1,233 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allResources = await getCollection('resources');
+const featuredResources = allResources.filter(resource => resource.data.featured);
+---
+
+<Layout title="Free Resources - 1818 Agency" description="Free design resources, tutorials, and tools for creatives">
+  <Header />
+
+  <main>
+    <section class="resources-hero section-dark">
+      <div class="container">
+        <h1>Free Resources</h1>
+        <p>Design packs, tutorials, templates, and tools to help you create better</p>
+      </div>
+    </section>
+
+    {featuredResources.length > 0 && (
+      <section class="featured-resources section">
+        <div class="container">
+          <h2>Featured Resources</h2>
+          <div class="resources-grid">
+            {featuredResources.map((resource) => (
+              <article class="resource-card featured">
+                <a href={`/resources/${resource.slug}`}>
+                  <div class="resource-image">
+                    <img src={resource.data.image} alt={resource.data.title} />
+                    <div class="resource-overlay">
+                      <span class="free-badge">FREE</span>
+                    </div>
+                  </div>
+                  <div class="resource-content">
+                    <h3>{resource.data.title}</h3>
+                    <p>{resource.data.description}</p>
+                    <div class="resource-meta">
+                      <span class="resource-category">{resource.data.category.replace('-', ' ')}</span>
+                      {resource.data.fileSize && (
+                        <span class="resource-size">{resource.data.fileSize}</span>
+                      )}
+                    </div>
+                    <div class="resource-tags">
+                      {resource.data.tags.map(tag => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <section class="all-resources section">
+      <div class="container">
+        <h2>All Free Resources</h2>
+        <div class="resources-grid">
+          {allResources.map((resource) => (
+            <article class="resource-card">
+              <a href={`/resources/${resource.slug}`}>
+                <div class="resource-image">
+                  <img src={resource.data.image} alt={resource.data.title} loading="lazy" />
+                  <div class="resource-overlay">
+                    <span class="free-badge">FREE</span>
+                  </div>
+                </div>
+                <div class="resource-content">
+                  <h3>{resource.data.title}</h3>
+                  <p>{resource.data.description}</p>
+                  <div class="resource-meta">
+                    <span class="resource-category">{resource.data.category.replace('-', ' ')}</span>
+                    {resource.data.fileSize && (
+                      <span class="resource-size">{resource.data.fileSize}</span>
+                    )}
+                  </div>
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .resources-hero {
+    padding: 8rem 0 4rem;
+    text-align: center;
+  }
+
+  .resources-hero h1 {
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .resources-hero p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 1.25rem;
+  }
+
+  .resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+
+  .resource-card {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: var(--transition);
+    background: var(--color-bg);
+  }
+
+  .resource-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-primary);
+  }
+
+  .resource-image {
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background: var(--color-accent);
+    position: relative;
+  }
+
+  .resource-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .resource-overlay {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .free-badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    border-radius: 2px;
+  }
+
+  .resource-card:hover .resource-image img {
+    transform: scale(1.05);
+  }
+
+  .resource-content {
+    padding: 1.5rem;
+  }
+
+  .resource-card h3 {
+    font-size: 1.25rem;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
+  }
+
+  .resource-card p {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+
+  .resource-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .resource-category {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+  }
+
+  .resource-size {
+    color: var(--color-text-light);
+  }
+
+  .resource-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(0, 0, 0, 0.05);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: 2px;
+  }
+
+  .resource-card.featured {
+    border: 2px solid var(--color-primary);
+  }
+
+  @media (max-width: 768px) {
+    .resources-hero {
+      padding: 6rem 0 3rem;
+    }
+
+    .resources-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

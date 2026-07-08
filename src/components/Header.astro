@@ -1,0 +1,177 @@
+---
+const navItems = [
+  { name: 'Services', href: '/#services', number: '01' },
+  { name: 'Our Work', href: '/work', number: '02' },
+  { name: 'Blog', href: '/blog', number: '03' },
+  { name: 'Shop', href: '/shop', number: '04' },
+  { name: 'Resources', href: '/resources', number: '05' },
+];
+---
+
+<header class="header">
+  <div class="container">
+    <nav class="nav">
+      <a href="/" class="logo">
+        <img src="/images/logo.png" alt="1818 Agency" />
+      </a>
+
+      <button class="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <ul class="nav-list">
+        {navItems.map((item) => (
+          <li class="nav-item">
+            <a href={item.href} class="nav-link">
+              <span class="nav-number">{item.number}</span>
+              <span>{item.name}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <a href="#contact" class="btn btn-contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 0;
+  }
+
+  .logo img {
+    height: 50px;
+    width: auto;
+    transition: var(--transition);
+  }
+
+  .logo:hover img {
+    opacity: 0.8;
+  }
+
+  .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: var(--color-primary);
+    transition: var(--transition);
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: var(--transition);
+  }
+
+  .nav-number {
+    font-size: 0.75rem;
+    color: var(--color-text-light);
+    font-weight: 400;
+  }
+
+  .nav-link:hover {
+    opacity: 0.6;
+  }
+
+  .btn-contact {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 968px) {
+    .menu-toggle {
+      display: flex;
+    }
+
+    .nav-list {
+      position: fixed;
+      top: 82px;
+      left: 0;
+      right: 0;
+      background: var(--color-bg);
+      flex-direction: column;
+      gap: 0;
+      padding: 2rem;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: var(--transition);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-list.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .nav-item {
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .btn-contact {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navList = document.querySelector('.nav-list');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  menuToggle?.addEventListener('click', () => {
+    navList?.classList.toggle('active');
+  });
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navList?.classList.remove('active');
+    });
+  });
+
+  // Close menu on scroll
+  window.addEventListener('scroll', () => {
+    navList?.classList.remove('active');
+  });
+</script>

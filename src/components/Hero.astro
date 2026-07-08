@@ -1,0 +1,222 @@
+---
+---
+
+<section class="hero">
+  <div class="hero-background">
+    <div class="wave-pattern"></div>
+    <div class="wave-pattern wave-2"></div>
+    <div class="hero-gradient"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-label">Design & Development Agency</p>
+      <h1 class="hero-title">
+        Creative Agency for<br />
+        Modern Brands
+      </h1>
+      <p class="hero-description">
+        We craft exceptional digital experiences through website development, UI/UX design,
+        product photography, and social media marketing.
+      </p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn btn-light">Get in Touch</a>
+        <a href="#services" class="btn-text">View Services →</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 100px;
+    background: #000000;
+  }
+
+  .hero-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  .wave-pattern {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(255, 255, 255, 0.03) 2px,
+        rgba(255, 255, 255, 0.03) 4px
+      );
+    transform: perspective(1000px) rotateX(60deg) translateZ(-200px);
+    transform-origin: center center;
+    animation: waveFloat 20s ease-in-out infinite;
+  }
+
+  .wave-2 {
+    opacity: 0.5;
+    animation: waveFloat 25s ease-in-out infinite reverse;
+    transform: perspective(1000px) rotateX(60deg) translateZ(-300px);
+  }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 70% 30%,
+      rgba(102, 126, 234, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse at 30% 70%,
+      rgba(118, 75, 162, 0.1) 0%,
+      transparent 50%
+    );
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes waveFloat {
+    0%, 100% {
+      transform: perspective(1000px) rotateX(60deg) translateZ(-200px) translateY(0);
+    }
+    50% {
+      transform: perspective(1000px) rotateX(60deg) translateZ(-200px) translateY(-30px);
+    }
+  }
+
+  @keyframes gradientShift {
+    0%, 100% {
+      opacity: 0.8;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-content {
+    max-width: 800px;
+    animation: fadeIn 0.8s ease-out;
+  }
+
+  .hero-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    color: var(--color-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-text {
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    transition: var(--transition);
+  }
+
+  .btn-text:hover {
+    color: var(--color-secondary);
+    transform: translateX(5px);
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    animation: scrollAnimation 2s infinite;
+  }
+
+  @keyframes scrollAnimation {
+    0%, 100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(10px);
+      opacity: 0.3;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      min-height: 90vh;
+      padding-top: 120px;
+    }
+
+    .hero-content {
+      max-width: 100%;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .scroll-indicator {
+      display: none;
+    }
+
+    .wave-pattern {
+      transform: perspective(800px) rotateX(60deg) translateZ(-150px);
+    }
+  }
+</style>

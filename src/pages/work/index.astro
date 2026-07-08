@@ -1,0 +1,439 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+const allWork = await getCollection('work');
+const sortedWork = allWork.sort((a, b) => b.data.year - a.data.year);
+const featuredWork = sortedWork.filter(project => project.data.featured);
+const regularWork = sortedWork.filter(project => !project.data.featured);
+
+const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'branding', 'photography', 'marketing'];
+---
+
+<Layout
+  title="Our Work - 1818 Agency"
+  description="Explore our portfolio of design, development, and marketing projects. See how we help brands create exceptional digital experiences."
+>
+  <Header />
+
+  <main class="work-page">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <p class="hero-label">Portfolio</p>
+          <h1>Our Work</h1>
+          <p class="hero-description">
+            A showcase of our latest projects across design, development, photography, and marketing.
+            Each project represents our commitment to excellence and innovation.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filters">
+      <div class="container">
+        <div class="filter-buttons" id="filter-buttons">
+          {categories.map((category) => (
+            <button
+              class={`filter-btn ${category === 'all' ? 'active' : ''}`}
+              data-filter={category}
+            >
+              {category.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Projects -->
+    {featuredWork.length > 0 && (
+      <section class="featured-section">
+        <div class="container">
+          <h2 class="section-title">Featured Projects</h2>
+          <div class="featured-grid">
+            {featuredWork.map((project) => (
+              <article class="project-card featured" data-category={project.data.category}>
+                <a href={`/work/${project.slug}`} class="project-link">
+                  <div class="project-image">
+                    <img src={project.data.image} alt={project.data.title} loading="lazy" />
+                    <div class="project-overlay">
+                      <span class="view-project">View Project →</span>
+                    </div>
+                  </div>
+                  <div class="project-content">
+                    <div class="project-meta">
+                      <span class="project-category">{project.data.category.split('-').join(' ')}</span>
+                      <span class="project-year">{project.data.year}</span>
+                    </div>
+                    <h3>{project.data.title}</h3>
+                    <p>{project.data.description}</p>
+                    {project.data.client && (
+                      <p class="project-client">Client: {project.data.client}</p>
+                    )}
+                  </div>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <!-- All Projects -->
+    <section class="projects-section">
+      <div class="container">
+        <h2 class="section-title">All Projects</h2>
+        <div class="projects-grid">
+          {sortedWork.map((project, index) => (
+            <article class="project-card" data-category={project.data.category} style={`animation-delay: ${index * 0.1}s`}>
+              <a href={`/work/${project.slug}`} class="project-link">
+                <div class="project-image">
+                  <img src={project.data.image} alt={project.data.title} loading="lazy" />
+                  <div class="project-overlay">
+                    <span class="view-project">View Project →</span>
+                  </div>
+                </div>
+                <div class="project-content">
+                  <div class="project-meta">
+                    <span class="project-category">{project.data.category.split('-').join(' ')}</span>
+                    <span class="project-year">{project.data.year}</span>
+                  </div>
+                  <h3>{project.data.title}</h3>
+                  <p>{project.data.description}</p>
+                  {project.data.tags && project.data.tags.length > 0 && (
+                    <div class="project-tags">
+                      {project.data.tags.slice(0, 3).map(tag => (
+                        <span class="tag">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-content">
+          <h2>Ready to Start Your Project?</h2>
+          <p>Let's create something amazing together</p>
+          <a href="/#contact" class="btn btn-primary">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .work-page {
+    padding-top: 82px;
+  }
+
+  .hero {
+    padding: 6rem 0 4rem;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .hero-label {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-description {
+    font-size: 1.25rem;
+    color: var(--color-text-light);
+    line-height: 1.8;
+  }
+
+  .filters {
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .filter-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.75rem 1.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--color-bg);
+    border-radius: 50px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    text-transform: capitalize;
+  }
+
+  .filter-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    border-color: transparent;
+  }
+
+  .featured-section,
+  .projects-section {
+    padding: 4rem 0;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+  }
+
+  .featured-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .project-card {
+    background: var(--color-bg);
+    overflow: hidden;
+    transition: var(--transition);
+    animation: fadeIn 0.6s ease-out forwards;
+    opacity: 0;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .project-card.hidden {
+    display: none;
+  }
+
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .project-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .project-image {
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--color-accent);
+    position: relative;
+  }
+
+  .featured .project-image {
+    aspect-ratio: 16/9;
+  }
+
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+  }
+
+  .project-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.95) 0%, rgba(118, 75, 162, 0.95) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    font-weight: 500;
+    opacity: 0;
+    transition: var(--transition);
+  }
+
+  .project-card:hover .project-image img {
+    transform: scale(1.05);
+  }
+
+  .project-card:hover .project-overlay {
+    opacity: 1;
+  }
+
+  .project-content {
+    padding: 2rem;
+  }
+
+  .project-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .project-category {
+    display: inline-block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .project-year {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+  }
+
+  .project-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .project-card p {
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+  }
+
+  .project-client {
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .project-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background: rgba(102, 126, 234, 0.1);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    border-radius: 20px;
+  }
+
+  .cta-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    color: white;
+    text-align: center;
+  }
+
+  .cta-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .cta-content .btn {
+    background: white;
+    color: var(--color-primary);
+  }
+
+  .cta-content .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: 2.5rem;
+    }
+
+    .hero-description {
+      font-size: 1.125rem;
+    }
+
+    .featured-grid,
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .cta-content h2 {
+      font-size: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Filter functionality
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Update active state
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      // Filter projects
+      projectCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+
+        if (filter === 'all' || category === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>
