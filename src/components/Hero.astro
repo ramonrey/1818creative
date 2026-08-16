@@ -10,7 +10,7 @@
 
   <div class="container">
     <div class="hero-content">
-      <p class="hero-label">Design & Development Agency</p>
+      <p class="hero-label">Where Brands Come to Life</p>
       <h1 class="hero-title">
         Creative Agency for<br />
         Modern Brands
@@ -40,8 +40,8 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    padding-top: 100px;
-    background: #000000;
+    padding-top: 140px;
+    background: var(--color-black);
   }
 
   .hero-background {
@@ -82,18 +82,13 @@
 
   .hero-gradient {
     position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      ellipse at 70% 30%,
-      rgba(102, 126, 234, 0.15) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      ellipse at 30% 70%,
-      rgba(118, 75, 162, 0.1) 0%,
-      transparent 50%
-    );
-    animation: gradientShift 15s ease infinite;
+    top: 8%;
+    right: 6%;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-volt);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
   }
 
   @keyframes waveFloat {
@@ -102,15 +97,6 @@
     }
     50% {
       transform: perspective(1000px) rotateX(60deg) translateZ(-200px) translateY(-30px);
-    }
-  }
-
-  @keyframes gradientShift {
-    0%, 100% {
-      opacity: 0.8;
-    }
-    50% {
-      opacity: 0.4;
     }
   }
 
@@ -135,7 +121,6 @@
   .hero-title {
     color: var(--color-secondary);
     margin-bottom: 1.5rem;
-    line-height: 1.1;
   }
 
   .hero-description {

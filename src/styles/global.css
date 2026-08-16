@@ -8,20 +8,62 @@
 }
 
 :root {
-  --color-primary: #000000;
-  --color-secondary: #ffffff;
-  --color-accent: #1a1a1a;
+  /* Neutrals — near-monochrome canvas */
+  --color-black: #000000;
+  --color-white: #ffffff;
+  --color-canvas: #e5e5e5;
+  --color-mist: #f3f3f3;
+  --color-ash: #c6c6c6;
+  --color-smoke: #979797;
+  --color-slate: #444444;
+  --color-graphite: #2f2f2f;
+
+  /* Accents — used sparingly */
+  --color-mint: #d1ffca;
+  --color-volt: #fff100;
+
+  /* Legacy/semantic aliases kept for pages that reference them directly */
+  --color-primary: var(--color-black);
+  --color-secondary: var(--color-white);
+  --color-accent: var(--color-graphite);
   --color-text: #333333;
   --color-text-light: #666666;
   --color-bg: #ffffff;
-  --color-bg-dark: #0a0a0a;
-  --spacing-xs: 0.5rem;
-  --spacing-sm: 1rem;
-  --spacing-md: 2rem;
-  --spacing-lg: 4rem;
-  --spacing-xl: 6rem;
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  --font-heading: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --color-bg-dark: #000000;
+
+  /* Surfaces used by the redesigned sections */
+  --color-canvas-text: var(--color-black);
+  --color-surface: var(--color-white);
+
+  /* Spacing — 8px base unit */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-6: 3rem;
+  --space-8: 4rem;
+  --space-10: 5rem;
+  --spacing-xs: var(--space-1);
+  --spacing-sm: var(--space-2);
+  --spacing-md: var(--space-4);
+  --spacing-lg: var(--space-8);
+  --spacing-xl: 5rem;
+
+  /* Radius scale */
+  --radius-sm: 4px;
+  --radius-btn: 8px;
+  --radius-card: 24px;
+  --radius-card-lg: 64px;
+  --radius-pill: 48px;
+  --radius-tag: 64px;
+
+  /* Type */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Barlow Condensed', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --font-heading: var(--font-display);
+
+  --container-max: 1200px;
   --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -33,7 +75,7 @@ html {
 body {
   font-family: var(--font-sans);
   color: var(--color-text);
-  background: var(--color-bg);
+  background: var(--color-canvas);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -42,26 +84,30 @@ body {
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
   margin-bottom: var(--spacing-md);
+  color: var(--color-black);
 }
 
 h1 {
-  font-size: clamp(2.5rem, 5vw, 5rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-size: clamp(2.75rem, 7vw, 7.5rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-size: clamp(2.25rem, 5vw, 4rem);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
 }
 
 h3 {
   font-size: clamp(1.5rem, 3vw, 2rem);
+  text-transform: none;
 }
 
 p {
@@ -83,7 +129,7 @@ img {
 
 /* Utilities */
 .container {
-  max-width: 1400px;
+  max-width: var(--container-max);
   margin: 0 auto;
   padding: 0 var(--spacing-md);
 }
@@ -97,14 +143,39 @@ img {
   color: var(--color-secondary);
 }
 
+.eyebrow,
+.section-label,
+.hero-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Tag / pill */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.9rem;
+  background: var(--color-mint);
+  color: var(--color-black);
+  border-radius: var(--radius-tag);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 1rem 2rem;
-  border: 1px solid currentColor;
-  background: transparent;
-  color: inherit;
+  padding: 1rem 1.75rem;
+  border-radius: var(--radius-btn);
+  border: none;
+  background: var(--color-black);
+  color: var(--color-white);
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
@@ -114,15 +185,29 @@ img {
 }
 
 .btn:hover {
-  background: var(--color-primary);
-  color: var(--color-secondary);
-  border-color: var(--color-primary);
+  background: var(--color-graphite);
+}
+
+.btn-light {
+  background: var(--color-white);
+  color: var(--color-black);
 }
 
 .btn-light:hover {
-  background: var(--color-secondary);
-  color: var(--color-primary);
-  border-color: var(--color-secondary);
+  background: var(--color-mist);
+  color: var(--color-black);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: inherit;
+  border: 1.5px solid var(--color-slate);
+  border-radius: var(--radius-sm);
+}
+
+.btn-ghost:hover {
+  background: var(--color-slate);
+  color: var(--color-white);
 }
 
 /* Animations */
@@ -159,7 +244,7 @@ img {
 @media (max-width: 768px) {
   :root {
     --spacing-lg: 3rem;
-    --spacing-xl: 4rem;
+    --spacing-xl: 3.5rem;
   }
 
   .container {

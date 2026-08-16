@@ -4,7 +4,7 @@ const services = [
     number: '01',
     title: 'Website Development',
     description: 'Custom websites and web applications built with modern technologies. Responsive, performant, and scalable solutions.',
-    features: ['Custom Development', 'Responsive Design', 'CMS Integration', 'E-commerce Solutions']
+    features: ['Custom Development', 'Responsive Design', 'CMS Integration', 'E-commerce Solutions', 'Debugging & Troubleshooting']
   },
   {
     number: '02',
@@ -56,7 +56,7 @@ const services = [
 
 <style>
   .services {
-    background: var(--color-bg);
+    background: var(--color-canvas);
   }
 
   .section-header {
@@ -86,23 +86,24 @@ const services = [
 
   .service-card {
     padding: 2.5rem;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-ash);
+    border-radius: var(--radius-card);
     transition: var(--transition);
-    background: var(--color-bg);
+    background: var(--color-white);
   }
 
   .service-card:hover {
-    border-color: var(--color-primary);
+    border-color: var(--color-black);
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
   .service-number {
     display: block;
+    font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-text-light);
+    color: var(--color-smoke);
     margin-bottom: 1.5rem;
-    font-weight: 500;
+    font-weight: 400;
   }
 
   .service-title {

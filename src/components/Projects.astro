@@ -60,7 +60,7 @@ const projects = [
 
 <style>
   .projects {
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--color-mist);
   }
 
   .section-header {
@@ -89,7 +89,9 @@ const projects = [
   }
 
   .project-card {
-    background: var(--color-bg);
+    background: var(--color-white);
+    border: 1px solid var(--color-ash);
+    border-radius: var(--radius-card);
     overflow: hidden;
     transition: var(--transition);
     animation: fadeIn 0.6s ease-out forwards;
@@ -98,13 +100,13 @@ const projects = [
 
   .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-color: var(--color-black);
   }
 
   .project-image {
     aspect-ratio: 16/10;
     overflow: hidden;
-    background: var(--color-accent);
+    background: var(--color-graphite);
     position: relative;
   }
 
@@ -117,14 +119,22 @@ const projects = [
 
   .project-overlay {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
-    display: flex;
+    top: 1rem;
+    left: 1rem;
+    right: auto;
+    bottom: auto;
+    background: var(--color-mint);
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.25rem;
+    color: var(--color-black);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
     font-weight: 500;
+    padding: 0.35rem 0.9rem;
+    border-radius: var(--radius-tag);
     opacity: 0;
     transition: var(--transition);
   }
