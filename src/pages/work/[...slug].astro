@@ -79,6 +79,15 @@ const relatedProjects = allWork
     <section class="featured-image">
       <div class="container">
         <img src={entry.data.image} alt={entry.data.title} />
+        {entry.data.secondaryImage && (
+          <img src={entry.data.secondaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
+        {entry.data.tertiaryImage && (
+          <img src={entry.data.tertiaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
+        {entry.data.quaternaryImage && (
+          <img src={entry.data.quaternaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
       </div>
     </section>
 
@@ -257,6 +266,10 @@ const relatedProjects = allWork
     height: auto;
     border-radius: 0;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .featured-image .secondary-image {
+    margin-top: 2rem;
   }
 
   .project-content {

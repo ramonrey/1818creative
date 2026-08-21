@@ -16,8 +16,7 @@
         Modern Brands
       </h1>
       <p class="hero-description">
-        We craft exceptional digital experiences through website development, UI/UX design,
-        product photography, and social media marketing.
+        Design and development for brands that want to stand out, not blend in.
       </p>
       <div class="hero-actions">
         <a href="#contact" class="btn btn-light">Get in Touch</a>
@@ -41,7 +40,7 @@
     position: relative;
     overflow: hidden;
     padding-top: 140px;
-    background: var(--color-black);
+    background: var(--color-volt);
   }
 
   .hero-background {
@@ -59,15 +58,15 @@
         0deg,
         transparent,
         transparent 2px,
-        rgba(255, 255, 255, 0.03) 2px,
-        rgba(255, 255, 255, 0.03) 4px
+        rgba(0, 0, 0, 0.04) 2px,
+        rgba(0, 0, 0, 0.04) 4px
       ),
       repeating-linear-gradient(
         90deg,
         transparent,
         transparent 2px,
-        rgba(255, 255, 255, 0.03) 2px,
-        rgba(255, 255, 255, 0.03) 4px
+        rgba(0, 0, 0, 0.04) 2px,
+        rgba(0, 0, 0, 0.04) 4px
       );
     transform: perspective(1000px) rotateX(60deg) translateZ(-200px);
     transform-origin: center center;
@@ -87,8 +86,8 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--color-volt);
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15);
+    background: var(--color-black);
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
   }
 
   @keyframes waveFloat {
@@ -114,18 +113,18 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(0, 0, 0, 0.6);
     margin-bottom: 1rem;
   }
 
   .hero-title {
-    color: var(--color-secondary);
+    color: var(--color-black);
     margin-bottom: 1.5rem;
   }
 
   .hero-description {
     font-size: 1.25rem;
-    color: rgba(255, 255, 255, 0.8);
+    color: rgba(0, 0, 0, 0.75);
     margin-bottom: 2.5rem;
     line-height: 1.6;
   }
@@ -139,25 +138,25 @@
 
   .btn-text {
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(0, 0, 0, 0.85);
     transition: var(--transition);
   }
 
   .btn-text:hover {
-    color: var(--color-secondary);
+    color: var(--color-black);
     transform: translateX(5px);
   }
 
   .scroll-indicator {
     position: absolute;
-    bottom: 3rem;
+    bottom: 1.25rem;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    color: rgba(255, 255, 255, 0.5);
+    color: rgba(0, 0, 0, 0.5);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -166,7 +165,7 @@
   .scroll-line {
     width: 1px;
     height: 50px;
-    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
     animation: scrollAnimation 2s infinite;
   }
 
