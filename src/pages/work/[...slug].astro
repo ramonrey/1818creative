@@ -2,23 +2,23 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const workEntries = await getCollection('work');
   return workEntries.map(entry => ({
-    params: { slug: entry.slug },
+    params: { slug: entry.id },
     props: { entry },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Get related projects (same category, exclude current)
 const allWork = await getCollection('work');
 const relatedProjects = allWork
-  .filter(project => project.data.category === entry.data.category && project.slug !== entry.slug)
+  .filter(project => project.data.category === entry.data.category && project.id !== entry.id)
   .slice(0, 3);
 ---
 
@@ -79,6 +79,15 @@ const relatedProjects = allWork
     <section class="featured-image">
       <div class="container">
         <img src={entry.data.image} alt={entry.data.title} />
+        {entry.data.secondaryImage && (
+          <img src={entry.data.secondaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
+        {entry.data.tertiaryImage && (
+          <img src={entry.data.tertiaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
+        {entry.data.quaternaryImage && (
+          <img src={entry.data.quaternaryImage} alt={entry.data.title} class="secondary-image" />
+        )}
       </div>
     </section>
 
@@ -116,7 +125,7 @@ const relatedProjects = allWork
           <div class="projects-grid">
             {relatedProjects.map(project => (
               <article class="project-card">
-                <a href={`/work/${project.slug}`}>
+                <a href={`/work/${project.id}`}>
                   <div class="project-image">
                     <img src={project.data.image} alt={project.data.title} loading="lazy" />
                     <div class="project-overlay">
@@ -257,6 +266,10 @@ const relatedProjects = allWork
     height: auto;
     border-radius: 0;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .featured-image .secondary-image {
+    margin-top: 2rem;
   }
 
   .project-content {

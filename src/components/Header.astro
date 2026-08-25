@@ -40,24 +40,26 @@ const navItems = [
 <style>
   .header {
     position: fixed;
-    top: 0;
+    top: 1.25rem;
     left: 0;
     right: 0;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
     z-index: 1000;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
 
   .nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1.5rem 0;
+    gap: 2rem;
+    padding: 0.75rem 0.75rem 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--color-ash);
+    border-radius: 1.5rem;
   }
 
   .logo img {
-    height: 50px;
+    height: 48px;
     width: auto;
     transition: var(--transition);
   }
@@ -99,15 +101,20 @@ const navItems = [
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
     transition: var(--transition);
   }
 
   .nav-number {
-    font-size: 0.75rem;
-    color: var(--color-text-light);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--color-smoke);
     font-weight: 400;
+    letter-spacing: normal;
+    text-transform: none;
   }
 
   .nav-link:hover {
@@ -115,8 +122,8 @@ const navItems = [
   }
 
   .btn-contact {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.9rem;
+    padding: 0.65rem 1.5rem;
+    font-size: 0.85rem;
   }
 
   @media (max-width: 968px) {
@@ -126,27 +133,30 @@ const navItems = [
 
     .nav-list {
       position: fixed;
-      top: 82px;
-      left: 0;
-      right: 0;
-      background: var(--color-bg);
+      top: 96px;
+      left: 1.25rem;
+      right: 1.25rem;
+      background: var(--color-white);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--color-ash);
       flex-direction: column;
       gap: 0;
       padding: 2rem;
-      transform: translateY(-100%);
+      transform: translateY(-20px);
       opacity: 0;
+      pointer-events: none;
       transition: var(--transition);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .nav-list.active {
       transform: translateY(0);
       opacity: 1;
+      pointer-events: auto;
     }
 
     .nav-item {
       padding: 1rem 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid var(--color-mist);
     }
 
     .btn-contact {

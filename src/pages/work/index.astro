@@ -23,7 +23,6 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <p class="hero-label">Portfolio</p>
           <h1>Our Work</h1>
           <p class="hero-description">
             A showcase of our latest projects across design, development, photography, and marketing.
@@ -57,7 +56,7 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
           <div class="featured-grid">
             {featuredWork.map((project) => (
               <article class="project-card featured" data-category={project.data.category}>
-                <a href={`/work/${project.slug}`} class="project-link">
+                <a href={`/work/${project.id}`} class="project-link">
                   <div class="project-image">
                     <img src={project.data.image} alt={project.data.title} loading="lazy" />
                     <div class="project-overlay">
@@ -90,7 +89,7 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
         <div class="projects-grid">
           {sortedWork.map((project, index) => (
             <article class="project-card" data-category={project.data.category} style={`animation-delay: ${index * 0.1}s`}>
-              <a href={`/work/${project.slug}`} class="project-link">
+              <a href={`/work/${project.id}`} class="project-link">
                 <div class="project-image">
                   <img src={project.data.image} alt={project.data.title} loading="lazy" />
                   <div class="project-overlay">
@@ -135,13 +134,10 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
 </Layout>
 
 <style>
-  .work-page {
-    padding-top: 82px;
-  }
-
   .hero {
-    padding: 6rem 0 4rem;
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    padding: calc(82px + 6rem) 0 4rem;
+    min-height: 447px;
+    background: var(--color-volt);
   }
 
   .hero-content {
@@ -150,26 +146,16 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
     margin: 0 auto;
   }
 
-  .hero-label {
-    font-size: 0.85rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-text-light);
-    margin-bottom: 1rem;
-  }
-
   .hero h1 {
-    font-size: 3.5rem;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--color-primary);
   }
 
   .hero-description {
     font-size: 1.25rem;
-    color: var(--color-text-light);
+    color: var(--color-black);
+    text-align: center;
+    max-width: none;
     line-height: 1.8;
   }
 
@@ -202,7 +188,7 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
   }
 
   .filter-btn.active {
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    background: var(--color-primary);
     color: white;
     border-color: transparent;
   }
@@ -354,7 +340,7 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
 
   .cta-section {
     padding: 5rem 0;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+    background: var(--color-volt);
     color: white;
     text-align: center;
   }
@@ -367,6 +353,9 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
   .cta-content p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
+    color: var(--color-black);
+    text-align: center;
+    max-width: none;
     opacity: 0.9;
   }
 
@@ -392,10 +381,6 @@ const categories = ['all', 'web-development', 'mobile-app', 'ui-ux-design', 'bra
   }
 
   @media (max-width: 768px) {
-    .hero h1 {
-      font-size: 2.5rem;
-    }
-
     .hero-description {
       font-size: 1.125rem;
     }

@@ -12,7 +12,7 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   <Header />
 
   <main>
-    <section class="shop-hero section-dark">
+    <section class="shop-hero">
       <div class="container">
         <h1>Digital Shop</h1>
         <p>Premium templates, UI kits, and design resources to accelerate your projects</p>
@@ -26,7 +26,7 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
           <div class="products-grid">
             {featuredProducts.map((product) => (
               <article class="product-card featured">
-                <a href={`/shop/${product.slug}`}>
+                <a href={`/shop/${product.id}`}>
                   <div class="product-image">
                     <img src={product.data.image} alt={product.data.title} />
                     <div class="product-overlay">
@@ -59,7 +59,7 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
         <div class="products-grid">
           {allProducts.map((product) => (
             <article class="product-card">
-              <a href={`/shop/${product.slug}`}>
+              <a href={`/shop/${product.id}`}>
                 <div class="product-image">
                   <img src={product.data.image} alt={product.data.title} loading="lazy" />
                   <div class="product-overlay">
@@ -87,18 +87,23 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
 
 <style>
   .shop-hero {
-    padding: 8rem 0 4rem;
+    padding: calc(82px + 6rem) 0 4rem;
+    min-height: 447px;
     text-align: center;
+    background: var(--color-volt);
   }
 
   .shop-hero h1 {
-    color: var(--color-secondary);
-    margin-bottom: 1rem;
+    color: var(--color-black);
+    margin-bottom: 1.5rem;
   }
 
   .shop-hero p {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--color-black);
+    text-align: center;
+    max-width: none;
     font-size: 1.25rem;
+    line-height: 1.8;
   }
 
   .products-grid {
@@ -222,9 +227,6 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   }
 
   @media (max-width: 768px) {
-    .shop-hero {
-      padding: 6rem 0 3rem;
-    }
 
     .products-grid {
       grid-template-columns: 1fr;
