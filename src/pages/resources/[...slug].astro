@@ -2,18 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const resources = await getCollection('resources');
   return resources.map((resource) => ({
-    params: { slug: resource.slug },
+    params: { slug: resource.id },
     props: { resource },
   }));
 }
 
 const { resource } = Astro.props;
-const { Content } = await resource.render();
+const { Content } = await render(resource);
 ---
 
 <Layout title={`${resource.data.title} - Free Resources`} description={resource.data.description}>
