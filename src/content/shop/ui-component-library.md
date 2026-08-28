@@ -1,12 +1,12 @@
 ---
-title: "Modern UI Component Library"
-description: "100+ premium UI components ready to use in your projects. Figma files included."
+title: 'Modern UI Component Library'
+description: '100+ premium UI components ready to use in your projects. Figma files included.'
 price: 79
-image: "/images/shop/ui-library.jpg"
-category: "ui-kits"
-tags: ["ui-kit", "components", "figma", "design-system"]
+image: '/images/shop/ui-library.jpg'
+category: 'ui-kits'
+tags: ['ui-kit', 'components', 'figma', 'design-system']
 featured: true
-previewLink: "https://demo.example.com/ui-kit"
+previewLink: '#'
 ---
 
 # Modern UI Component Library

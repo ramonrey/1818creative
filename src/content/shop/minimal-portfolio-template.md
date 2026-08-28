@@ -1,12 +1,12 @@
 ---
-title: "Minimal Portfolio Template"
-description: "A clean, modern portfolio template perfect for creatives and agencies. Built with Astro and fully customizable."
+title: 'Minimal Portfolio Template'
+description: 'A clean, modern portfolio template perfect for creatives and agencies. Built with Astro and fully customizable.'
 price: 49
-image: "/images/shop/portfolio-template.jpg"
-category: "templates"
-tags: ["portfolio", "astro", "minimal", "responsive"]
+image: '/images/shop/portfolio-template.jpg'
+category: 'templates'
+tags: ['portfolio', 'astro', 'minimal', 'responsive']
 featured: true
-previewLink: "https://demo.example.com/portfolio"
+previewLink: '#'
 ---
 
 # Minimal Portfolio Template
