@@ -53,6 +53,8 @@ const work = defineCollection({
     secondaryImage: z.string().optional(),
     tertiaryImage: z.string().optional(),
     quaternaryImage: z.string().optional(),
+    beforeAfter: z.boolean().default(false),
+    overview: z.string().optional(),
     heroColor: z.string().optional(),
     category: z.enum(['web-development', 'mobile-app', 'ui-ux-design', 'branding', 'photography', 'marketing', 'other']),
     client: z.string().optional(),

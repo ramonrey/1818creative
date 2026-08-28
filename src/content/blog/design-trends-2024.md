@@ -1,14 +1,14 @@
 ---
-title: "Top Design Trends for 2024"
-description: "Explore the latest design trends shaping the digital landscape in 2024."
+title: "Top Design Trends for 2026"
+description: "Explore the latest design trends shaping the digital landscape in 2026."
 pubDate: 2024-02-01
-author: "Sarah Johnson"
+author: "1818 Creative"
 image: "/images/blog/trends.jpg"
 tags: ["design", "trends", "ui-ux"]
 featured: false
 ---
 
-# Top Design Trends for 2024
+# Top Design Trends for 2026
 
 The design world is constantly evolving. Here are the trends we're watching in 2024.
 

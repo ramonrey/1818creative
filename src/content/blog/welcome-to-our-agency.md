@@ -1,10 +1,10 @@
 ---
-title: "Welcome to 1818 Agency"
-description: "Discover our journey and what makes us unique in the design and development space."
+title: 'Welcome to 1818 Agency'
+description: 'Discover our journey and what makes us unique in the design and development space.'
 pubDate: 2024-01-15
-author: "1818 Team"
-image: "/images/blog/welcome.jpg"
-tags: ["agency", "design", "development"]
+author: '1818 Team'
+image: '/images/blog/welcome.jpg'
+tags: ['agency', 'design', 'development']
 featured: true
 ---
 
@@ -14,7 +14,7 @@ We're thrilled to launch our new website and share our passion for creating exce
 
 ## Our Mission
 
-At 1818, we believe in the power of design and technology to transform businesses. Our mission is to help brands stand out in the digital landscape through:
+At 1818 Creative, we believe in the power of design and technology to transform businesses. Our mission is to help brands stand out in the digital landscape through:
 
 - **Innovative Design**: Creating beautiful, user-centered interfaces
 - **Quality Development**: Building robust, scalable web solutions

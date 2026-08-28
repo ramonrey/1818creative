@@ -75,18 +75,53 @@ const relatedProjects = allWork
       </div>
     </section>
 
+    <!-- Overview (shown above images for before/after case studies) -->
+    {entry.data.beforeAfter && entry.data.overview && (
+      <section class="overview-section">
+        <div class="container">
+          <div class="content-wrapper">
+            <h2>Project Overview</h2>
+            <p>{entry.data.overview}</p>
+          </div>
+        </div>
+      </section>
+    )}
+
     <!-- Featured Image -->
     <section class="featured-image">
       <div class="container">
-        <img src={entry.data.image} alt={entry.data.title} />
-        {entry.data.secondaryImage && (
-          <img src={entry.data.secondaryImage} alt={entry.data.title} class="secondary-image" />
-        )}
-        {entry.data.tertiaryImage && (
-          <img src={entry.data.tertiaryImage} alt={entry.data.title} class="secondary-image" />
-        )}
-        {entry.data.quaternaryImage && (
-          <img src={entry.data.quaternaryImage} alt={entry.data.title} class="secondary-image" />
+        {entry.data.beforeAfter ? (
+          <div class="before-after">
+            <div class="before-after-group">
+              <span class="before-after-label">Before</span>
+              <img src={entry.data.image} alt={`${entry.data.title} before redesign`} />
+              {entry.data.secondaryImage && (
+                <img src={entry.data.secondaryImage} alt={`${entry.data.title} before redesign`} class="secondary-image" />
+              )}
+            </div>
+            <div class="before-after-group">
+              <span class="before-after-label">After</span>
+              {entry.data.tertiaryImage && (
+                <img src={entry.data.tertiaryImage} alt={`${entry.data.title} redesign`} />
+              )}
+              {entry.data.quaternaryImage && (
+                <img src={entry.data.quaternaryImage} alt={`${entry.data.title} redesign`} class="secondary-image" />
+              )}
+            </div>
+          </div>
+        ) : (
+          <>
+            <img src={entry.data.image} alt={entry.data.title} />
+            {entry.data.secondaryImage && (
+              <img src={entry.data.secondaryImage} alt={entry.data.title} class="secondary-image" />
+            )}
+            {entry.data.tertiaryImage && (
+              <img src={entry.data.tertiaryImage} alt={entry.data.title} class="secondary-image" />
+            )}
+            {entry.data.quaternaryImage && (
+              <img src={entry.data.quaternaryImage} alt={entry.data.title} class="secondary-image" />
+            )}
+          </>
         )}
       </div>
     </section>
@@ -158,12 +193,12 @@ const relatedProjects = allWork
 
   .project-hero {
     padding: 4rem 0 2rem;
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--color-volt);
   }
 
   .breadcrumb {
     font-size: 0.875rem;
-    color: var(--color-text-light);
+    color: rgba(0, 0, 0, 0.6);
     margin-bottom: 2rem;
   }
 
@@ -198,7 +233,7 @@ const relatedProjects = allWork
 
   .project-description {
     font-size: 1.25rem;
-    color: var(--color-text-light);
+    color: var(--color-black);
     line-height: 1.8;
     margin-bottom: 2rem;
   }
@@ -208,8 +243,8 @@ const relatedProjects = allWork
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     padding: 2rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   }
 
   .detail {
@@ -222,12 +257,13 @@ const relatedProjects = allWork
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-text-light);
+    color: rgba(0, 0, 0, 0.6);
   }
 
   .detail-value {
     font-size: 1.125rem;
     font-weight: 600;
+    color: var(--color-black);
   }
 
   .detail-link {
@@ -250,8 +286,8 @@ const relatedProjects = allWork
 
   .tag {
     padding: 0.5rem 1rem;
-    background: rgba(102, 126, 234, 0.1);
-    color: var(--color-primary);
+    background: rgba(0, 0, 0, 0.08);
+    color: var(--color-black);
     font-size: 0.875rem;
     border-radius: 25px;
     font-weight: 500;
@@ -270,6 +306,47 @@ const relatedProjects = allWork
 
   .featured-image .secondary-image {
     margin-top: 2rem;
+  }
+
+  .before-after {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+  }
+
+  .before-after-group img {
+    width: 100%;
+    height: auto;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+
+  .before-after-group .secondary-image {
+    margin-top: 2rem;
+  }
+
+  .before-after-label {
+    display: block;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .overview-section {
+    padding: 3rem 0 0;
+  }
+
+  .overview-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .overview-section p {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--color-text);
   }
 
   .project-content {
