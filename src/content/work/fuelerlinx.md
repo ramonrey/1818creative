@@ -4,10 +4,10 @@ description: "A comprehensive redesign of the marketing site for corporate aviat
 category: 'web-development'
 client: 'FuelerLinx'
 year: 2024
-image: '/images/projects/project-4.jpg'
-secondaryImage: '/images/projects/oldFL1.png'
-tertiaryImage: '/images/projects/oldFL2.png'
-quaternaryImage: '/images/projects/project-1.jpg'
+image: '/images/projects/oldFL1.png'
+secondaryImage: '/images/projects/oldFL2.png'
+tertiaryImage: '/images/projects/project-1.jpg'
+quaternaryImage: '/images/projects/project-2.jpg'
 featured: true
 tags: ['Web Design', 'Web Development', 'Aviation SaaS', 'UX Design', 'Responsive Design']
 projectUrl: 'https://fuelerlinx.netlify.app/'

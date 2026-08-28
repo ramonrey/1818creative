@@ -30,7 +30,7 @@ const relatedProjects = allWork
 
   <main class="project-page">
     <!-- Hero Section -->
-    <section class="project-hero">
+    <section class="project-hero" style={entry.data.heroColor ? `background: ${entry.data.heroColor};` : undefined}>
       <div class="container">
         <div class="breadcrumb">
           <a href="/work">Our Work</a> / <span>{entry.data.title}</span>
