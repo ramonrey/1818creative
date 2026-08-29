@@ -60,6 +60,32 @@ const plans = [
   },
 ];
 
+const launch = {
+  name: 'Launch',
+  price: 'From $1,500',
+  cadence: 'one-time',
+  tagline: 'Prefer to own your site outright? We design, build and hand it over.',
+  features: [
+    'Custom-designed, mobile-responsive website, up to 6 pages',
+    'Copywriting support and content migration from your old site',
+    'Technical SEO setup and Google Analytics 4',
+    'WCAG 2.1 AA accessibility',
+    'Full handover — you own the code, hosting and domain',
+    '30 days of post-launch support',
+  ],
+  care: {
+    price: '$95',
+    cadence: '/month',
+    note: 'Optional but recommended. Keeps the site online and current.',
+    features: [
+      'Managed hosting with SSL, CDN and daily backups',
+      'Software, security and uptime monitoring',
+      '1 hour of content edits each month',
+      'Email support — cancel anytime',
+    ],
+  },
+};
+
 const addOns = [
   {
     title: 'Extra page or landing page',
@@ -106,10 +132,49 @@ const addOns = [
         <p class="hero-label">Pricing</p>
         <h1>Website plans</h1>
         <p>
-          Transparent pricing and flexible plans that grow with your business. Every
-          tier is one flat monthly fee covering your website, hosting, and unlimited
-          updates. There's no large upfront cost, and you can move up a tier whenever
-          you need more.
+          Transparent pricing and flexible plans that grow with your business. Choose
+          Launch, a one-time build you own outright — or a flat monthly plan covering
+          your website, hosting and unlimited updates. Move between them whenever your
+          needs change.
+        </p>
+      </div>
+    </section>
+
+    <section class="launch section">
+      <div class="container">
+        <div class="launch-panel">
+          <div class="launch-main">
+            <p class="section-label">One-time build</p>
+            <h2>{launch.name}</h2>
+            <p class="launch-price">
+              <span class="launch-amount">{launch.price}</span>
+              <span class="launch-cadence">{launch.cadence}</span>
+            </p>
+            <p class="launch-tagline">{launch.tagline}</p>
+            <ul class="launch-features">
+              {launch.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+            <a href="/#contact" class="btn plan-cta">Start a Launch project</a>
+          </div>
+          <aside class="launch-care">
+            <h3>+ Care plan</h3>
+            <p class="launch-care-price">
+              <span class="launch-care-amount">{launch.care.price}</span>
+              <span class="launch-care-cadence">{launch.care.cadence}</span>
+            </p>
+            <p class="launch-care-note">{launch.care.note}</p>
+            <ul class="launch-features">
+              {launch.care.features.map((feature) => (
+                <li>{feature}</li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+        <p class="plans-note">
+          Extra pages beyond six are billed at the add-on rate below. Not sure
+          whether Launch or a monthly plan fits? <a href="/#contact">Ask us.</a>
         </p>
       </div>
     </section>
@@ -137,7 +202,10 @@ const addOns = [
             </article>
           ))}
         </div>
-        <p class="plans-note">Billed monthly. No long-term contracts — cancel anytime.</p>
+        <p class="plans-note">
+          Billed monthly. No long-term contracts — cancel anytime. After 12
+          months you can buy your site outright and move to Care-only.
+        </p>
       </div>
     </section>
 
@@ -325,6 +393,145 @@ const addOns = [
     font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--color-smoke);
+  }
+
+  /* Launch — one-time build */
+  .launch-panel {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+  }
+
+  .launch-main {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-black);
+    border-radius: var(--radius-card);
+  }
+
+  .launch-main .section-label {
+    color: var(--color-text-light);
+    margin-bottom: 1rem;
+  }
+
+  .launch-main h2 {
+    font-size: 1.5rem;
+    text-transform: none;
+    letter-spacing: -0.01em;
+    margin-bottom: 0.75rem;
+  }
+
+  .launch-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+  }
+
+  .launch-amount {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-black);
+  }
+
+  .launch-cadence {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-smoke);
+  }
+
+  .launch-tagline {
+    color: var(--color-text-light);
+    margin-bottom: 1.5rem;
+  }
+
+  .launch-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    flex: 1;
+  }
+
+  .launch-features li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    color: var(--color-text);
+    position: relative;
+  }
+
+  .launch-features li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--color-primary);
+  }
+
+  .launch-main .plan-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .launch-care {
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+    background: var(--color-white);
+    border: 2px solid var(--color-ash);
+    border-radius: var(--radius-card);
+  }
+
+  .launch-care h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .launch-care-price {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .launch-care-amount {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-black);
+  }
+
+  .launch-care-cadence {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-smoke);
+  }
+
+  .launch-care-note {
+    color: var(--color-text-light);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .launch-care .launch-features li {
+    font-size: 0.95rem;
+  }
+
+  .plans-note a {
+    border-bottom: 1px solid currentColor;
+  }
+
+  @media (max-width: 860px) {
+    .launch-panel {
+      grid-template-columns: 1fr;
+      max-width: 460px;
+      margin: 0 auto;
+    }
   }
 
   /* Custom solutions */
