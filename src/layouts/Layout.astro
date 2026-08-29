@@ -72,5 +72,53 @@ const orgSchema = {
   </head>
   <body>
     <slot />
+    <script is:inline>
+      // Reliable anchor navigation. The browser's native hash jump fires before
+      // images settle on long pages, and CSS scroll-behavior: smooth gets that
+      // early jump cancelled by the layout shift — leaving you stuck at the top.
+      // Handle it explicitly: instant scroll, offset by scroll-padding-top.
+      (function () {
+        function jumpTo(id) {
+          var el = id && document.getElementById(id);
+          if (!el) return false;
+          var root = document.documentElement;
+          var prev = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          el.scrollIntoView({ block: 'start' });
+          root.style.scrollBehavior = prev;
+          return true;
+        }
+
+        // Landing on this page with a hash (e.g. /#contact from another page).
+        if (location.hash) {
+          var id = location.hash.slice(1);
+          window.addEventListener('load', function () {
+            jumpTo(id);
+            setTimeout(function () { jumpTo(id); }, 250);
+          });
+        }
+
+        // Same-page anchor clicks (e.g. the nav "Services" link on the homepage).
+        document.addEventListener('click', function (e) {
+          var a = e.target.closest && e.target.closest('a[href*="#"]');
+          if (!a) return;
+          var href = a.getAttribute('href') || '';
+          var hashIndex = href.indexOf('#');
+          if (hashIndex < 0) return;
+          var path = href.slice(0, hashIndex) || location.pathname;
+          // normalise "/" vs "/index.html" vs current path
+          var samePage =
+            path === location.pathname ||
+            path === '/' && location.pathname === '/' ||
+            path === '' ;
+          if (!samePage) return; // let the browser navigate to the other page
+          var targetId = href.slice(hashIndex + 1);
+          if (jumpTo(targetId)) {
+            e.preventDefault();
+            history.pushState(null, '', '#' + targetId);
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
