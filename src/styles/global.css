@@ -69,6 +69,8 @@
 
 html {
     scroll-behavior: smooth;
+    /* Keep anchor targets clear of the fixed header */
+    scroll-padding-top: 7rem;
     font-size: 16px;
 }
 
@@ -79,7 +81,9 @@ body {
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden;
+    /* clip (not hidden) so <body> doesn't become a scroll container,
+       which silently breaks scroll-behavior: smooth and anchor jumps */
+    overflow-x: clip;
 }
 
 /* Typography */

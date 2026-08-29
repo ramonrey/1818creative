@@ -26,4 +26,4 @@ Our team combines creativity with technical expertise to deliver projects that e
 
 ## Get in Touch
 
-Ready to start your project? [Contact us](#contact) today and let's create something amazing together.
+Ready to start your project? [Contact us](/#contact) today and let's create something amazing together.
