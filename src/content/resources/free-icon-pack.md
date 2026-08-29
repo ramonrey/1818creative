@@ -1,13 +1,13 @@
 ---
-title: "Essential Icon Pack - 200 Icons"
-description: "A free collection of 200 essential icons for web and mobile projects. Available in SVG and PNG formats."
-image: "/images/resources/icon-pack.jpg"
-category: "design-packs"
-tags: ["icons", "svg", "free", "design"]
-downloadLink: "/downloads/icon-pack.zip"
+title: 'Essential Icon Pack - 200 Icons'
+description: 'A free collection of 200 essential icons for web and mobile projects. Available in SVG and PNG formats.'
+image: '/images/resources/icon-pack.jpg'
+category: 'design-packs'
+tags: ['icons', 'svg', 'free', 'design']
+downloadLink: '#'
 featured: true
-fileSize: "2.5 MB"
-fileType: "ZIP (SVG, PNG)"
+fileSize: '2.5 MB'
+fileType: 'ZIP (SVG, PNG)'
 ---
 
 # Essential Icon Pack

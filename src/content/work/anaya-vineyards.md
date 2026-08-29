@@ -5,7 +5,9 @@ category: 'web-development'
 client: 'Anaya Vineyards'
 year: 2023
 image: '/images/projects/anaya-1.jpg'
-secondaryImage: '/images/projects/project-2.jpg'
+secondaryImage: '/images/projects/anayaFB.jpg'
+tertiaryImage: '/images/projects/anayaLeft.jpg'
+quaternaryImage: '/images/projects/anayaRight.jpg'
 featured: true
 tags: ['Winery', 'E-commerce', 'Brand Identity', 'Squarespace', 'Product Photography', 'Direct-to-Consumer']
 projectUrl: 'https://www.anayavineyards.com/'

@@ -4,7 +4,10 @@ description: 'Packaging identity for a certified organic, paleo-friendly snack b
 category: 'branding'
 client: 'Best Express Foods'
 year: 2019
-image: '/images/projects/project-2.jpg'
+image: '/images/projects/paleobarsHero.jpg'
+secondaryImage: '/images/projects/paleobarsFB.jpg'
+tertiaryImage: '/images/projects/paleobarsLeft.jpg'
+quaternaryImage: '/images/projects/paleobarsRight.jpg'
 featured: true
 tags: ['Packaging Design', 'Brand Identity', 'Retail Packaging', 'Print']
 ---

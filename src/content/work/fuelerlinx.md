@@ -4,18 +4,16 @@ description: "A comprehensive redesign of the marketing site for corporate aviat
 category: 'web-development'
 client: 'FuelerLinx'
 year: 2024
-image: '/images/projects/project-4.jpg'
-secondaryImage: '/images/projects/oldFL1.png'
-tertiaryImage: '/images/projects/oldFL2.png'
-quaternaryImage: '/images/projects/project-1.jpg'
+image: '/images/projects/oldFL1.png'
+secondaryImage: '/images/projects/oldFL2.png'
+tertiaryImage: '/images/projects/FL_Main.jpg'
+quaternaryImage: '/images/projects/SolutionsFB.jpg'
+beforeAfter: true
+overview: "FuelerLinx runs corporate aviation's largest jet fuel marketplace, handling over $3.2B in annual transactions, 120,000+ monthly dispatches, and 5,000+ aircraft. Their public marketing site hadn't been touched since 2017 and no longer reflected the scale or authority of the platform. We rebuilt it from the ground up."
 featured: true
 tags: ['Web Design', 'Web Development', 'Aviation SaaS', 'UX Design', 'Responsive Design']
 projectUrl: 'https://fuelerlinx.netlify.app/'
 ---
-
-## Project Overview
-
-FuelerLinx runs corporate aviation's largest jet fuel marketplace, handling over $3.2B in annual transactions, 120,000+ monthly dispatches, and 5,000+ aircraft. Their public marketing site hadn't been touched since 2017 and no longer reflected the scale or authority of the platform. We rebuilt it from the ground up.
 
 ### Key Deliverables
 

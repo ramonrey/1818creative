@@ -4,8 +4,10 @@ description: 'Rebuilding a wine lounge digital presence — moving from a locked
 category: 'web-development'
 client: 'The Lounge at Lodi Crush'
 year: 2026
-image: '/images/projects/project-3.jpg'
-secondaryImage: '/images/projects/project-2.jpg'
+image: '/images/projects/loungeHero.jpg'
+secondaryImage: '/images/projects/loungeFB.jpg'
+tertiaryImage: '/images/projects/loungeLeft.jpg'
+quaternaryImage: '/images/projects/loungeRight.jpg'
 featured: true
 tags: ['Web Design', 'Web Development', 'Astro JS', 'Branding']
 projectUrl: 'https://theloungelodicrush.netlify.app/'

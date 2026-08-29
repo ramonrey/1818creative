@@ -165,6 +165,12 @@ const { Content } = await render(post);
     line-height: 1.8;
   }
 
+  .content-wrapper :global(img) {
+    width: 100%;
+    border-radius: 4px;
+    margin: 2rem 0;
+  }
+
   .content-wrapper :global(a) {
     color: var(--color-primary);
     text-decoration: underline;
