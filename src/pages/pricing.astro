@@ -159,6 +159,7 @@ const addOns = [
             <a href="/#contact" class="btn plan-cta">Start a Launch project</a>
           </div>
           <aside class="launch-care">
+            <p class="section-label">Ongoing</p>
             <h3>+ Care plan</h3>
             <p class="launch-care-price">
               <span class="launch-care-amount">{launch.care.price}</span>
@@ -400,7 +401,7 @@ const addOns = [
     display: grid;
     grid-template-columns: 1.6fr 1fr;
     gap: 2rem;
-    align-items: start;
+    align-items: stretch;
   }
 
   .launch-main {
@@ -412,7 +413,8 @@ const addOns = [
     border-radius: var(--radius-card);
   }
 
-  .launch-main .section-label {
+  .launch-main .section-label,
+  .launch-care .section-label {
     color: var(--color-text-light);
     margin-bottom: 1rem;
   }
@@ -486,7 +488,9 @@ const addOns = [
   }
 
   .launch-care h3 {
-    font-size: 1.15rem;
+    font-size: 1.5rem;
+    text-transform: none;
+    letter-spacing: -0.01em;
     margin-bottom: 0.75rem;
   }
 
@@ -494,12 +498,12 @@ const addOns = [
     display: flex;
     align-items: baseline;
     gap: 0.35rem;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .launch-care-amount {
     font-family: var(--font-display);
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
@@ -508,18 +512,13 @@ const addOns = [
 
   .launch-care-cadence {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-smoke);
   }
 
   .launch-care-note {
     color: var(--color-text-light);
-    font-size: 0.95rem;
     margin-bottom: 1.5rem;
-  }
-
-  .launch-care .launch-features li {
-    font-size: 0.95rem;
   }
 
   .plans-note a {
