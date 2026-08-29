@@ -1,7 +1,7 @@
 ---
 title: 'Welcome to 1818 Agency'
 description: 'Discover our journey and what makes us unique in the design and development space.'
-pubDate: 2024-01-15
+pubDate: 2026-08-27
 author: '1818 Team'
 image: '/images/blog/welcome.jpg'
 tags: ['agency', 'design', 'development']

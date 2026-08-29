@@ -2,24 +2,28 @@
 const projects = [
   {
     title: 'Anaya Vineyards',
+    slug: 'anaya-vineyards',
     category: 'Web Development',
     description: 'Transforming a static site into a full e-commerce platform for a family-owned Lodi winery',
     image: '/images/projects/anaya-1.jpg',
   },
   {
     title: 'Paleo Bars',
+    slug: 'paleo-bars',
     category: 'Branding',
     description: 'Packaging identity for a certified organic, paleo-friendly snack bar',
     image: '/images/projects/paleobarsHero.jpg',
   },
   {
     title: 'The Lounge Lodi',
+    slug: 'the-lounge-lodi',
     category: 'Web Development',
     description: 'Rebuilding a wine lounge digital presence on a fully owned Astro JS platform',
     image: '/images/projects/loungeHero.jpg',
   },
   {
     title: 'FuelerLinx',
+    slug: 'fuelerlinx',
     category: 'Web Development',
     description: "Redesigning the marketing site for corporate aviation's largest jet fuel marketplace",
     image: '/images/projects/FL_Main.jpg',
@@ -50,7 +54,7 @@ const projects = [
             <span class="project-category">{project.category}</span>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
-            <a href="#" class="project-link">View Project →</a>
+            <a href={`/work/${project.slug}`} class="project-link">View Project →</a>
           </div>
         </article>
       ))}
