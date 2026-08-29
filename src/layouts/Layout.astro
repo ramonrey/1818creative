@@ -4,9 +4,40 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = "1818 - Creative Agency for Modern Brands" } = Astro.props;
+const {
+  title,
+  description = 'Web design, branding, and marketing studio in the Greater Sacramento area. We build fast, distinctive websites for brands that want to stand out.',
+  image = '/images/logo.png',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: '1818 Creative',
+  description,
+  url: Astro.site?.toString(),
+  logo: new URL('/images/logo.png', Astro.site).toString(),
+  image: ogImage.toString(),
+  email: 'info@1818creative.com',
+  telephone: '+1-209-607-6811',
+  areaServed: 'Greater Sacramento Area',
+  address: {
+    '@type': 'PostalAddress',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  },
+  sameAs: [
+    'https://www.instagram.com/1818creative/',
+    'https://www.facebook.com/1818creative',
+    'https://www.youtube.com/@1818_Creative',
+  ],
+};
 ---
 
 <!doctype html>
@@ -14,13 +45,30 @@ const { title, description = "1818 - Creative Agency for Modern Brands" } = Astr
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="1818 Creative" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:image" content={ogImage} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <title>{title}</title>
+
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
   </head>
   <body>
     <slot />
