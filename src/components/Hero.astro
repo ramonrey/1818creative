@@ -121,6 +121,8 @@
   .hero-title {
     color: var(--color-black);
     margin-bottom: 1.5rem;
+    /* Keep the two <br>-defined lines intact — never let a line wrap on its own */
+    white-space: nowrap;
   }
 
   .hero-description {
@@ -189,6 +191,11 @@
 
     .hero-content {
       max-width: 100%;
+    }
+
+    .hero-title {
+      /* On narrow phones let it wrap naturally rather than overflow */
+      white-space: normal;
     }
 
     .hero-actions {
