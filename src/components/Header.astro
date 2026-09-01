@@ -16,23 +16,40 @@ const navItems = [
         <img src="/images/logo.png" alt="1818 Agency" />
       </a>
 
-      <button class="menu-toggle" aria-label="Toggle menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-right">
+        <ul class="nav-list">
+          {navItems.map((item) => (
+            <li class="nav-item">
+              <a href={item.href} class="nav-link">
+                <span>{item.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
 
-      <ul class="nav-list">
-        {navItems.map((item) => (
-          <li class="nav-item">
-            <a href={item.href} class="nav-link">
-              <span>{item.name}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+        <button
+          class="theme-toggle"
+          type="button"
+          aria-label="Toggle dark mode"
+          title="Toggle dark mode"
+        >
+          <svg class="icon icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+          <svg class="icon icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+          </svg>
+        </button>
 
-      <a href="/#contact" class="btn btn-contact">Contact</a>
+        <a href="/#contact" class="btn btn-contact">Contact</a>
+
+        <button class="menu-toggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </nav>
   </div>
 </header>
@@ -52,10 +69,16 @@ const navItems = [
     justify-content: space-between;
     gap: 2rem;
     padding: 0.75rem 0.75rem 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.75);
+    background: var(--header-bg);
     backdrop-filter: blur(12px);
-    border: 1px solid var(--color-ash);
+    border: 1px solid var(--header-border);
     border-radius: 1.5rem;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
   }
 
   .logo img {
@@ -66,6 +89,10 @@ const navItems = [
 
   .logo:hover img {
     opacity: 0.8;
+  }
+
+  :global(html[data-theme='dark']) .logo img {
+    filter: brightness(0) invert(1);
   }
 
   .menu-toggle {
@@ -81,7 +108,7 @@ const navItems = [
   .menu-toggle span {
     width: 25px;
     height: 2px;
-    background: var(--color-primary);
+    background: var(--heading);
     transition: var(--transition);
   }
 
@@ -111,7 +138,7 @@ const navItems = [
   .nav-number {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    color: var(--color-smoke);
+    color: var(--faint);
     font-weight: 400;
     letter-spacing: normal;
     text-transform: none;
@@ -121,12 +148,52 @@ const navItems = [
     opacity: 0.6;
   }
 
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    border: 1px solid var(--header-border);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--heading);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .theme-toggle:hover {
+    background: var(--surface-alt);
+  }
+
+  .theme-toggle .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .theme-toggle .icon-sun {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .icon-moon {
+    display: none;
+  }
+
+  :global(html[data-theme='dark']) .theme-toggle .icon-sun {
+    display: block;
+  }
+
   .btn-contact {
     padding: 0.65rem 1.5rem;
     font-size: 0.85rem;
   }
 
   @media (max-width: 968px) {
+    .nav-right {
+      gap: 0.75rem;
+    }
+
     .menu-toggle {
       display: flex;
     }
@@ -136,9 +203,9 @@ const navItems = [
       top: 96px;
       left: 1.25rem;
       right: 1.25rem;
-      background: var(--color-white);
+      background: var(--surface);
       border-radius: var(--radius-card);
-      border: 1px solid var(--color-ash);
+      border: 1px solid var(--border);
       flex-direction: column;
       gap: 0;
       padding: 2rem;
@@ -156,7 +223,7 @@ const navItems = [
 
     .nav-item {
       padding: 1rem 0;
-      border-bottom: 1px solid var(--color-mist);
+      border-bottom: 1px solid var(--border);
     }
 
     .btn-contact {
@@ -183,5 +250,16 @@ const navItems = [
   // Close menu on scroll
   window.addEventListener('scroll', () => {
     navList?.classList.remove('active');
+  });
+
+  // Dark mode toggle. Layout.astro sets the initial theme before paint.
+  const themeToggle = document.querySelector('.theme-toggle');
+  themeToggle?.addEventListener('click', () => {
+    const next =
+      document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem('theme', next);
+    } catch (e) {}
   });
 </script>

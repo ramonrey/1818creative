@@ -41,7 +41,7 @@
     position: relative;
     overflow: hidden;
     padding-top: 140px;
-    background: var(--color-volt);
+    background: var(--feature-bg);
   }
 
   .hero-background {
@@ -59,15 +59,15 @@
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.04) 2px,
-        rgba(0, 0, 0, 0.04) 4px
+        var(--feature-hairline) 2px,
+        var(--feature-hairline) 4px
       ),
       repeating-linear-gradient(
         90deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.04) 2px,
-        rgba(0, 0, 0, 0.04) 4px
+        var(--feature-hairline) 2px,
+        var(--feature-hairline) 4px
       );
     transform: perspective(1000px) rotateX(60deg) translateZ(-200px);
     transform-origin: center center;
@@ -87,8 +87,8 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--color-black);
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+    background: var(--feature-dot);
+    box-shadow: 0 0 0 1px var(--feature-hairline);
   }
 
   @keyframes waveFloat {
@@ -114,12 +114,12 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--feature-muted);
     margin-bottom: 1rem;
   }
 
   .hero-title {
-    color: var(--color-black);
+    color: var(--feature-fg);
     margin-bottom: 1.5rem;
     /* Keep the two <br>-defined lines intact — never let a line wrap on its own */
     white-space: nowrap;
@@ -127,7 +127,7 @@
 
   .hero-description {
     font-size: 1.25rem;
-    color: rgba(0, 0, 0, 0.75);
+    color: var(--feature-muted);
     margin-bottom: 2.5rem;
     line-height: 1.6;
   }
@@ -141,12 +141,12 @@
 
   .btn-text {
     font-weight: 500;
-    color: rgba(0, 0, 0, 0.85);
+    color: var(--feature-muted);
     transition: var(--transition);
   }
 
   .btn-text:hover {
-    color: var(--color-black);
+    color: var(--feature-fg);
     transform: translateX(5px);
   }
 
@@ -159,7 +159,7 @@
     flex-direction: column;
     align-items: center;
     gap: 1rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: var(--feature-faint);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
@@ -168,7 +168,7 @@
   .scroll-line {
     width: 1px;
     height: 50px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+    background: linear-gradient(to bottom, var(--feature-faint), transparent);
     animation: scrollAnimation 2s infinite;
   }
 
