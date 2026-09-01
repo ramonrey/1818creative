@@ -2,21 +2,32 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { getCollection, render } from 'astro:content';
+import { sanityClient } from '../../sanity/lib/client';
+import { urlFor } from '../../sanity/lib/image';
+import { renderBody } from '../../sanity/lib/portableText';
+import type { Post } from '../../sanity/lib/types';
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await sanityClient.fetch<Post[]>(`
+    *[_type == "post" && defined(slug.current)]{
+      _id, title, "slug": slug.current, description, publishedAt,
+      author, tags, featured, mainImage, body
+    }
+  `);
   return posts.map((post) => ({
-    params: { slug: post.id },
+    params: { slug: post.slug },
     props: { post },
   }));
 }
 
 const { post } = Astro.props;
-const { Content } = await render(post);
+const bodyHtml = renderBody(post.body);
+const heroImage = post.mainImage?.asset
+  ? urlFor(post.mainImage).width(1200).fit('max').auto('format').url()
+  : null;
 ---
 
-<Layout title={`${post.data.title} - 1818 Agency`} description={post.data.description}>
+<Layout title={`${post.title} - 1818 Agency`} description={post.description}>
   <Header />
 
   <main>
@@ -24,33 +35,33 @@ const { Content } = await render(post);
       <header class="post-header section-dark">
         <div class="container">
           <div class="post-meta">
-            <time>{post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+            <time datetime={post.publishedAt}>
+              {new Date(post.publishedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
             <span>•</span>
-            <span>{post.data.author}</span>
+            <span>{post.author}</span>
           </div>
-          <h1>{post.data.title}</h1>
-          <p class="post-description">{post.data.description}</p>
+          <h1>{post.title}</h1>
+          <p class="post-description">{post.description}</p>
           <div class="post-tags">
-            {post.data.tags.map(tag => (
+            {(post.tags ?? []).map((tag) => (
               <span class="tag">{tag}</span>
             ))}
           </div>
         </div>
       </header>
 
-      {post.data.image && (
+      {heroImage && (
         <div class="post-featured-image">
           <div class="container">
-            <img src={post.data.image} alt={post.data.title} />
+            <img src={heroImage} alt={post.mainImage?.alt || post.title} />
           </div>
         </div>
       )}
 
       <div class="post-content">
         <div class="container">
-          <div class="content-wrapper">
-            <Content />
-          </div>
+          <div class="content-wrapper" set:html={bodyHtml} />
         </div>
       </div>
 
