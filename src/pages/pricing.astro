@@ -262,22 +262,21 @@ const addOns = [
   .pricing-hero {
     padding: calc(82px + 6rem) 0 4rem;
     text-align: center;
-    background: var(--color-volt);
+    background: var(--feature-bg);
   }
 
   .pricing-hero .hero-label {
-    color: var(--color-black);
-    opacity: 0.65;
+    color: var(--feature-faint);
     margin-bottom: 1rem;
   }
 
   .pricing-hero h1 {
-    color: var(--color-black);
+    color: var(--feature-fg);
     margin-bottom: 1.5rem;
   }
 
   .pricing-hero p {
-    color: var(--color-black);
+    color: var(--feature-muted);
     text-align: center;
     max-width: 58ch;
     margin: 0 auto;
@@ -299,19 +298,19 @@ const addOns = [
     flex-direction: column;
     height: 100%;
     padding: 2.5rem;
-    background: var(--color-white);
-    border: 2px solid var(--color-ash);
+    background: var(--surface);
+    border: 2px solid var(--border);
     border-radius: var(--radius-card);
     transition: var(--transition);
   }
 
   .plan-card:hover {
-    border-color: var(--color-black);
+    border-color: var(--border-strong);
     transform: translateY(-5px);
   }
 
   .plan-card.popular {
-    border: 2px solid var(--color-black);
+    border: 2px solid var(--border-strong);
   }
 
   .plan-badge {
@@ -321,8 +320,8 @@ const addOns = [
     display: inline-flex;
     align-items: center;
     padding: 0.35rem 0.9rem;
-    background: var(--color-volt);
-    color: var(--color-black);
+    background: var(--accent);
+    color: var(--accent-fg);
     border-radius: var(--radius-tag);
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -348,17 +347,17 @@ const addOns = [
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--color-black);
+    color: var(--heading);
   }
 
   .plan-cadence {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--color-smoke);
+    color: var(--faint);
   }
 
   .plan-tagline {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1.5rem;
   }
 
@@ -371,7 +370,7 @@ const addOns = [
 
   .plan-features li {
     padding: 0.5rem 0 0.5rem 1.5rem;
-    color: var(--color-text);
+    color: var(--fg);
     position: relative;
   }
 
@@ -379,7 +378,7 @@ const addOns = [
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--color-primary);
+    color: var(--heading);
   }
 
   .plan-cta {
@@ -393,7 +392,7 @@ const addOns = [
     margin: 2.5rem auto 0;
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--color-smoke);
+    color: var(--faint);
   }
 
   /* Launch — one-time build */
@@ -408,14 +407,14 @@ const addOns = [
     display: flex;
     flex-direction: column;
     padding: 2.5rem;
-    background: var(--color-white);
-    border: 2px solid var(--color-black);
+    background: var(--surface);
+    border: 2px solid var(--border-strong);
     border-radius: var(--radius-card);
   }
 
   .launch-main .section-label,
   .launch-care .section-label {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1rem;
   }
 
@@ -439,17 +438,17 @@ const addOns = [
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--color-black);
+    color: var(--heading);
   }
 
   .launch-cadence {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--color-smoke);
+    color: var(--faint);
   }
 
   .launch-tagline {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1.5rem;
   }
 
@@ -462,7 +461,7 @@ const addOns = [
 
   .launch-features li {
     padding: 0.5rem 0 0.5rem 1.5rem;
-    color: var(--color-text);
+    color: var(--fg);
     position: relative;
   }
 
@@ -470,7 +469,7 @@ const addOns = [
     content: '→';
     position: absolute;
     left: 0;
-    color: var(--color-primary);
+    color: var(--heading);
   }
 
   .launch-main .plan-cta {
@@ -482,8 +481,8 @@ const addOns = [
     display: flex;
     flex-direction: column;
     padding: 2.5rem;
-    background: var(--color-white);
-    border: 2px solid var(--color-ash);
+    background: var(--surface);
+    border: 2px solid var(--border);
     border-radius: var(--radius-card);
   }
 
@@ -507,17 +506,17 @@ const addOns = [
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
-    color: var(--color-black);
+    color: var(--heading);
   }
 
   .launch-care-cadence {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    color: var(--color-smoke);
+    color: var(--faint);
   }
 
   .launch-care-note {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1.5rem;
   }
 
@@ -535,7 +534,7 @@ const addOns = [
 
   /* Custom solutions */
   .custom {
-    background: var(--color-canvas);
+    background: var(--bg);
   }
 
   .custom-panel {
@@ -544,24 +543,24 @@ const addOns = [
     justify-content: space-between;
     gap: 2.5rem;
     padding: 3rem;
-    background: var(--color-black);
-    color: var(--color-white);
+    background: var(--invert-bg);
+    color: var(--invert-fg);
+    border: 1px solid var(--invert-border);
     border-radius: var(--radius-card);
   }
 
   .custom-panel .section-label {
-    color: var(--color-white);
-    opacity: 0.6;
+    color: var(--invert-faint);
     margin-bottom: 1rem;
   }
 
   .custom-panel h2 {
-    color: var(--color-white);
+    color: var(--invert-fg);
     margin-bottom: 1rem;
   }
 
   .custom-panel p {
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--invert-muted);
     margin-bottom: 0;
   }
 
@@ -577,13 +576,13 @@ const addOns = [
   }
 
   .section-header .section-label {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1rem;
   }
 
   .section-description {
     font-size: 1.125rem;
-    color: var(--color-text-light);
+    color: var(--muted);
   }
 
   .addons-grid {
@@ -597,14 +596,14 @@ const addOns = [
     flex-direction: column;
     height: 100%;
     padding: 2rem;
-    background: var(--color-white);
-    border: 2px solid var(--color-ash);
+    background: var(--surface);
+    border: 2px solid var(--border);
     border-radius: var(--radius-card);
     transition: var(--transition);
   }
 
   .addon-card:hover {
-    border-color: var(--color-black);
+    border-color: var(--border-strong);
     transform: translateY(-5px);
   }
 
@@ -624,11 +623,11 @@ const addOns = [
     display: block;
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--color-smoke);
+    color: var(--faint);
   }
 
   .addon-card p {
-    color: var(--color-text-light);
+    color: var(--muted);
     font-size: 0.95rem;
     margin-bottom: 1.25rem;
     flex: 1;

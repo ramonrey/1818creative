@@ -93,7 +93,7 @@ const { Content } = await render(product);
   .product-image-main img {
     width: 100%;
     border-radius: 4px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border);
   }
 
   .product-info {
@@ -103,7 +103,8 @@ const { Content } = await render(product);
   .product-category {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-alt);
+    color: var(--muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -117,7 +118,7 @@ const { Content } = await render(product);
 
   .product-description {
     font-size: 1.125rem;
-    color: var(--color-text-light);
+    color: var(--muted);
     line-height: 1.8;
     margin-bottom: 2rem;
   }
@@ -127,20 +128,20 @@ const { Content } = await render(product);
     align-items: center;
     gap: 2rem;
     padding: 2rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
     margin-bottom: 1.5rem;
   }
 
   .product-price {
     font-size: 2.5rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--heading);
   }
 
   .preview-link {
     display: inline-block;
-    color: var(--color-primary);
+    color: var(--heading);
     font-weight: 500;
     margin-bottom: 2rem;
     transition: var(--transition);
@@ -159,7 +160,8 @@ const { Content } = await render(product);
   .tag {
     display: inline-block;
     padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-alt);
+    color: var(--muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -167,7 +169,7 @@ const { Content } = await render(product);
   }
 
   .product-content {
-    background: rgba(0, 0, 0, 0.02);
+    background: var(--surface-alt);
   }
 
   .content-wrapper {
@@ -190,7 +192,7 @@ const { Content } = await render(product);
   .content-wrapper :global(p) {
     margin-bottom: 1.5rem;
     line-height: 1.8;
-    color: var(--color-text);
+    color: var(--fg);
   }
 
   .content-wrapper :global(ul) {
@@ -204,14 +206,14 @@ const { Content } = await render(product);
   }
 
   .product-footer {
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--border);
   }
 
   .back-link {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--color-primary);
+    color: var(--heading);
     font-weight: 500;
     transition: var(--transition);
   }

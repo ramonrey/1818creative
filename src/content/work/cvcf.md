@@ -8,7 +8,7 @@ image: '/images/projects/cvcf1.png'
 secondaryImage: '/images/projects/cvcf2.png'
 tertiaryImage: '/images/projects/cvcf3.png'
 quaternaryImage: '/images/projects/cvcf4.png'
-heroColor: 'var(--color-volt)'
+heroColor: 'var(--feature-bg)'
 featured: false
 tags: ['Web Design', 'Web Development', 'WIX', 'RESPONSIVE', 'ui', 'mobile', 'CMS', 'Healthcare']
 projectUrl: 'https://www.cvcancerfoundation.org/'
