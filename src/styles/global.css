@@ -65,6 +65,97 @@
 
     --container-max: 1200px;
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    /* ---- Semantic theme tokens (light) ------------------------------------
+       Components read these, not the raw palette above, so a theme swap is a
+       token swap. The dark values live in :root[data-theme="dark"] below;
+       Layout.astro stamps data-theme on <html> before first paint. */
+    --bg: var(--color-canvas);
+    --fg: var(--color-text);
+    --heading: var(--color-black);
+    --surface: var(--color-white);
+    --surface-alt: var(--color-mist);
+    --border: var(--color-ash);
+    --border-strong: var(--color-black);
+    --muted: var(--color-text-light);
+    --faint: var(--color-smoke);
+
+    /* Feature sections (hero, CTA) — light: a volt-yellow block with dark ink */
+    --feature-bg: var(--color-volt);
+    --feature-fg: var(--color-black);
+    --feature-muted: rgba(0, 0, 0, 0.72);
+    --feature-faint: rgba(0, 0, 0, 0.5);
+    --feature-hairline: rgba(0, 0, 0, 0.04);
+    --feature-dot: var(--color-black);
+
+    /* Inverted sections (Contact, Footer) — a dark block on a light page */
+    --invert-bg: var(--color-black);
+    --invert-fg: var(--color-white);
+    --invert-muted: rgba(255, 255, 255, 0.7);
+    --invert-faint: rgba(255, 255, 255, 0.5);
+    --invert-surface: rgba(255, 255, 255, 0.05);
+    --invert-border: rgba(255, 255, 255, 0.2);
+
+    /* Accent — identical in both themes */
+    --accent: var(--color-volt);
+    --accent-fg: var(--color-black);
+
+    /* Buttons */
+    --btn-bg: var(--color-black);
+    --btn-fg: var(--color-white);
+    --btn-bg-hover: var(--color-graphite);
+    --btn-light-bg: var(--color-white);
+    --btn-light-fg: var(--color-black);
+    --btn-light-bg-hover: var(--color-mist);
+
+    /* Header pill */
+    --header-bg: rgba(255, 255, 255, 0.75);
+    --header-border: var(--color-ash);
+
+    color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+    --bg: #0e0e0e;
+    --fg: rgba(255, 255, 255, 0.72);
+    --heading: #ffffff;
+    --surface: #1a1a1a;
+    --surface-alt: #151515;
+    --border: rgba(255, 255, 255, 0.14);
+    --border-strong: rgba(255, 255, 255, 0.65);
+    --muted: rgba(255, 255, 255, 0.6);
+    --faint: rgba(255, 255, 255, 0.4);
+
+    /* Feature sections become a dark surface; volt shows only on accents */
+    --feature-bg: #141414;
+    --feature-fg: rgba(255, 255, 255, 0.92);
+    --feature-muted: rgba(255, 255, 255, 0.65);
+    --feature-faint: rgba(255, 255, 255, 0.4);
+    --feature-hairline: rgba(255, 255, 255, 0.05);
+    --feature-dot: var(--color-volt);
+
+    /* Inverted sections stay the deepest layer so they still read as distinct */
+    --invert-bg: #000000;
+    --invert-fg: rgba(255, 255, 255, 0.92);
+    --invert-muted: rgba(255, 255, 255, 0.6);
+    --invert-faint: rgba(255, 255, 255, 0.4);
+    --invert-surface: rgba(255, 255, 255, 0.06);
+    --invert-border: rgba(255, 255, 255, 0.14);
+
+    /* Both button styles flip to volt on a dark page — .btn-light only ever
+       sits on dark surfaces (hero, section-dark, black panels), so volt reads
+       well everywhere and keeps the CTA on-brand. */
+    --btn-bg: var(--color-volt);
+    --btn-fg: #000000;
+    --btn-bg-hover: #d9cf00;
+    --btn-light-bg: var(--color-volt);
+    --btn-light-fg: #000000;
+    --btn-light-bg-hover: #d9cf00;
+
+    --header-bg: rgba(18, 18, 18, 0.78);
+    --header-border: rgba(255, 255, 255, 0.14);
+
+    color-scheme: dark;
 }
 
 html {
@@ -76,8 +167,8 @@ html {
 
 body {
     font-family: var(--font-sans);
-    color: var(--color-text);
-    background: var(--color-canvas);
+    color: var(--fg);
+    background: var(--bg);
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -98,7 +189,7 @@ h6 {
     line-height: 0.95;
     letter-spacing: -0.02em;
     margin-bottom: var(--spacing-md);
-    color: var(--color-black);
+    color: var(--heading);
 }
 
 h1 {
@@ -148,8 +239,8 @@ img {
 }
 
 .section-dark {
-    background: var(--color-bg-dark);
-    color: var(--color-secondary);
+    background: var(--invert-bg);
+    color: var(--invert-fg);
 }
 
 .eyebrow,
@@ -183,8 +274,8 @@ img {
     padding: 1rem 1.75rem;
     border-radius: var(--radius-btn);
     border: none;
-    background: var(--color-black);
-    color: var(--color-white);
+    background: var(--btn-bg);
+    color: var(--btn-fg);
     font-size: 0.95rem;
     font-weight: 500;
     cursor: pointer;
@@ -194,17 +285,17 @@ img {
 }
 
 .btn:hover {
-    background: var(--color-graphite);
+    background: var(--btn-bg-hover);
 }
 
 .btn-light {
-    background: var(--color-white);
-    color: var(--color-black);
+    background: var(--btn-light-bg);
+    color: var(--btn-light-fg);
 }
 
 .btn-light:hover {
-    background: var(--color-mist);
-    color: var(--color-black);
+    background: var(--btn-light-bg-hover);
+    color: var(--btn-light-fg);
 }
 
 .btn-ghost {
