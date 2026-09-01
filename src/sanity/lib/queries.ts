@@ -16,14 +16,10 @@ export const POSTS_QUERY = `
   }
 `;
 
-/** Slugs only — for getStaticPaths. */
-export const POST_SLUGS_QUERY = `
-  *[_type == "post" && defined(slug.current)][].slug.current
-`;
-
-/** A single post by slug, including the full body. */
-export const POST_QUERY = `
-  *[_type == "post" && slug.current == $slug][0]{
+/** Every post including its body — for getStaticPaths on the post route. */
+export const POST_WITH_BODY_QUERY = `
+  *[_type == "post" && defined(slug.current)]
+  | order(publishedAt desc){
     _id,
     title,
     "slug": slug.current,

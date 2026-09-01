@@ -1,9 +1,8 @@
-import imageUrlBuilder from '@sanity/image-url';
-import type { SanityImageSource } from '@sanity/image-url/lib/types/types';
+import { createImageUrlBuilder, type SanityImageSource } from '@sanity/image-url';
 
-import { sanityClient } from './client';
+import { dataset, projectId } from './client';
 
-const builder = imageUrlBuilder(sanityClient);
+const builder = createImageUrlBuilder({ projectId: projectId ?? '', dataset });
 
 /**
  * Build a CDN URL for a Sanity image, e.g. urlFor(post.mainImage).width(800).url()

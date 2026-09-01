@@ -2,18 +2,12 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import { sanityClient } from '../../sanity/lib/client';
 import { urlFor } from '../../sanity/lib/image';
+import { getPostsWithBody } from '../../sanity/lib/posts';
 import { renderBody } from '../../sanity/lib/portableText';
-import type { Post } from '../../sanity/lib/types';
 
 export async function getStaticPaths() {
-  const posts = await sanityClient.fetch<Post[]>(`
-    *[_type == "post" && defined(slug.current)]{
-      _id, title, "slug": slug.current, description, publishedAt,
-      author, tags, featured, mainImage, body
-    }
-  `);
+  const posts = await getPostsWithBody();
   return posts.map((post) => ({
     params: { slug: post.slug },
     props: { post },
