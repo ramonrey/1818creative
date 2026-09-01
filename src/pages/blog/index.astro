@@ -95,16 +95,16 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
     padding: calc(82px + 6rem) 0 4rem;
     min-height: 447px;
     text-align: center;
-    background: var(--color-volt);
+    background: var(--feature-bg);
   }
 
   .blog-hero h1 {
-    color: var(--color-black);
+    color: var(--feature-fg);
     margin-bottom: 1.5rem;
   }
 
   .blog-hero p {
-    color: var(--color-black);
+    color: var(--feature-muted);
     text-align: center;
     max-width: none;
     font-size: 1.25rem;
@@ -119,20 +119,22 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
   }
 
   .featured-card {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
     overflow: hidden;
     transition: var(--transition);
   }
 
   .featured-card:hover {
     transform: translateY(-5px);
+    border-color: var(--border-strong);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   }
 
   .featured-image {
     aspect-ratio: 16/9;
     overflow: hidden;
-    background: var(--color-accent);
+    background: var(--surface-alt);
   }
 
   .featured-image img {
@@ -158,20 +160,21 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
   }
 
   .post-card {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
     overflow: hidden;
     transition: var(--transition);
   }
 
   .post-card:hover {
-    border-color: var(--color-primary);
+    border-color: var(--border-strong);
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
   }
 
   .post-image {
     aspect-ratio: 16/9;
     overflow: hidden;
-    background: var(--color-accent);
+    background: var(--surface-alt);
   }
 
   .post-image img {
@@ -194,7 +197,7 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
     align-items: center;
     gap: 0.5rem;
     font-size: 0.85rem;
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1rem;
   }
 
@@ -202,12 +205,12 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
   .featured-card h3 {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
-    color: var(--color-primary);
+    color: var(--heading);
   }
 
   .post-card p,
   .featured-card p {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1rem;
     line-height: 1.6;
   }
@@ -221,7 +224,8 @@ const featuredPosts = sortedPosts.filter(post => post.data.featured);
   .tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-alt);
+    color: var(--muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;

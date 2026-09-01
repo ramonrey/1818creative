@@ -193,17 +193,17 @@ const relatedProjects = allWork
 
   .project-hero {
     padding: 4rem 0 2rem;
-    background: var(--color-volt);
+    background: var(--feature-bg);
   }
 
   .breadcrumb {
     font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--feature-muted);
     margin-bottom: 2rem;
   }
 
   .breadcrumb a {
-    color: var(--color-primary);
+    color: var(--feature-fg);
     transition: var(--transition);
   }
 
@@ -220,7 +220,7 @@ const relatedProjects = allWork
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: var(--color-primary);
+    color: var(--feature-fg);
     font-weight: 600;
     margin-bottom: 1rem;
   }
@@ -233,7 +233,7 @@ const relatedProjects = allWork
 
   .project-description {
     font-size: 1.25rem;
-    color: var(--color-black);
+    color: var(--feature-muted);
     line-height: 1.8;
     margin-bottom: 2rem;
   }
@@ -243,8 +243,8 @@ const relatedProjects = allWork
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
     padding: 2rem 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    border-top: 1px solid var(--feature-border);
+    border-bottom: 1px solid var(--feature-border);
   }
 
   .detail {
@@ -257,19 +257,19 @@ const relatedProjects = allWork
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--feature-muted);
   }
 
   .detail-value {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--color-black);
+    color: var(--feature-fg);
   }
 
   .detail-link {
     font-size: 1.125rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--feature-fg);
     transition: var(--transition);
   }
 
@@ -286,8 +286,8 @@ const relatedProjects = allWork
 
   .tag {
     padding: 0.5rem 1rem;
-    background: rgba(0, 0, 0, 0.08);
-    color: var(--color-black);
+    background: var(--feature-chip-bg);
+    color: var(--feature-fg);
     font-size: 0.875rem;
     border-radius: 25px;
     font-weight: 500;
@@ -330,7 +330,7 @@ const relatedProjects = allWork
     text-transform: uppercase;
     letter-spacing: 0.15em;
     font-weight: 600;
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1.5rem;
   }
 
@@ -346,7 +346,7 @@ const relatedProjects = allWork
   .overview-section p {
     font-size: 1.125rem;
     line-height: 1.8;
-    color: var(--color-text);
+    color: var(--fg);
   }
 
   .project-content {
@@ -361,7 +361,7 @@ const relatedProjects = allWork
   .prose {
     font-size: 1.125rem;
     line-height: 1.8;
-    color: var(--color-text);
+    color: var(--fg);
   }
 
   .prose :global(h2) {
@@ -402,7 +402,7 @@ const relatedProjects = allWork
   }
 
   .quote-icon {
-    color: var(--color-primary);
+    color: var(--heading);
     margin-bottom: 2rem;
   }
 
@@ -411,12 +411,12 @@ const relatedProjects = allWork
     line-height: 1.8;
     font-style: italic;
     margin-bottom: 1.5rem;
-    color: var(--color-text);
+    color: var(--fg);
   }
 
   .testimonial cite {
     font-size: 1rem;
-    color: var(--color-text-light);
+    color: var(--muted);
     font-style: normal;
   }
 
@@ -454,7 +454,7 @@ const relatedProjects = allWork
   .project-image {
     aspect-ratio: 16/10;
     overflow: hidden;
-    background: var(--color-accent);
+    background: var(--surface-alt);
     position: relative;
     margin-bottom: 1.5rem;
   }
@@ -494,7 +494,7 @@ const relatedProjects = allWork
   }
 
   .project-card p {
-    color: var(--color-text-light);
+    color: var(--muted);
     line-height: 1.6;
   }
 

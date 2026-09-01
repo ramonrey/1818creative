@@ -90,16 +90,16 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
     padding: calc(82px + 6rem) 0 4rem;
     min-height: 447px;
     text-align: center;
-    background: var(--color-volt);
+    background: var(--feature-bg);
   }
 
   .shop-hero h1 {
-    color: var(--color-black);
+    color: var(--feature-fg);
     margin-bottom: 1.5rem;
   }
 
   .shop-hero p {
-    color: var(--color-black);
+    color: var(--feature-muted);
     text-align: center;
     max-width: none;
     font-size: 1.25rem;
@@ -114,7 +114,8 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   }
 
   .product-card {
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--surface);
+    border: 1px solid var(--border);
     overflow: hidden;
     transition: var(--transition);
   }
@@ -122,13 +123,13 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    border-color: var(--color-primary);
+    border-color: var(--border-strong);
   }
 
   .product-image {
     aspect-ratio: 4/3;
     overflow: hidden;
-    background: var(--color-accent);
+    background: var(--surface-alt);
     position: relative;
   }
 
@@ -178,19 +179,19 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
 
   .product-card h3 {
     font-size: 1.25rem;
-    color: var(--color-primary);
+    color: var(--heading);
     flex: 1;
   }
 
   .product-price {
     font-size: 1.5rem;
     font-weight: 600;
-    color: var(--color-primary);
+    color: var(--heading);
     white-space: nowrap;
   }
 
   .product-card p {
-    color: var(--color-text-light);
+    color: var(--muted);
     margin-bottom: 1rem;
     line-height: 1.6;
     font-size: 0.95rem;
@@ -199,7 +200,8 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   .product-category {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-alt);
+    color: var(--muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -215,7 +217,8 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   .tag {
     display: inline-block;
     padding: 0.25rem 0.75rem;
-    background: rgba(0, 0, 0, 0.05);
+    background: var(--surface-alt);
+    color: var(--muted);
     font-size: 0.75rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -223,7 +226,7 @@ const featuredProducts = allProducts.filter(product => product.data.featured);
   }
 
   .product-card.featured {
-    border: 2px solid var(--color-primary);
+    border: 2px solid var(--border-strong);
   }
 
   @media (max-width: 768px) {
