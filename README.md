@@ -181,6 +181,20 @@ Edit `src/components/Contact.astro` and `src/components/Footer.astro` to update:
 - Social media links
 - Location
 
+### Contact Form
+
+The form in `src/components/Contact.astro` submits to [Web3Forms](https://web3forms.com).
+
+1. Create a free access key at web3forms.com, entering the inbox address that
+   should receive submissions.
+2. Locally: copy `.env.example` to `.env` and set `PUBLIC_WEB3FORMS_ACCESS_KEY`.
+3. In production: set the same `PUBLIC_WEB3FORMS_ACCESS_KEY` variable in the
+   host's environment settings (Cloudflare Pages / Netlify) so it is available
+   at build time.
+
+Without a key the form shows a "not configured" message instead of sending.
+A hidden `botcheck` honeypot field filters basic spam bots.
+
 ### Updating Services
 
 Edit `src/components/Services.astro` to modify the services array with your offerings.
