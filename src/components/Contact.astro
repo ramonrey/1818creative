@@ -1,4 +1,9 @@
 ---
+// Web3Forms access key. Set PUBLIC_WEB3FORMS_ACCESS_KEY in a local .env file and
+// in the host's environment variables (Cloudflare Pages / Netlify / etc.).
+// Get a free key at https://web3forms.com by entering the inbox address that
+// should receive submissions.
+const WEB3FORMS_ACCESS_KEY = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
 ---
 
 <section id="contact" class="contact section-dark">
@@ -18,7 +23,7 @@
           </div>
           <div class="contact-method">
             <h4>Phone</h4>
-            <a href="209-607-6811">209.607.6811</a>
+            <a href="tel:+12096076811">209.607.6811</a>
           </div>
           <div class="contact-method">
             <h4>Location</h4>
@@ -28,6 +33,17 @@
       </div>
 
       <form class="contact-form" id="contact-form">
+        <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+        <input type="hidden" name="from_name" value="1818creative.com contact form" />
+        <input
+          type="checkbox"
+          name="botcheck"
+          class="botcheck"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+
         <div class="form-group">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required />
@@ -49,27 +65,68 @@
         </div>
 
         <button type="submit" class="btn btn-light">Send Message</button>
+        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
       </form>
     </div>
   </div>
 </section>
 
 <script>
-  const CONTACT_EMAIL = 'info@1818creative.com';
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const statusEl = document.getElementById('form-status');
+  const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 
-  document.getElementById('contact-form')?.addEventListener('submit', (event) => {
+  function setStatus(message: string, state: 'pending' | 'success' | 'error') {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.dataset.state = state;
+  }
+
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!form) return;
 
-    const form = event.currentTarget as HTMLFormElement;
-    const name = (form.elements.namedItem('name') as HTMLInputElement).value;
-    const email = (form.elements.namedItem('email') as HTMLInputElement).value;
-    const subject = (form.elements.namedItem('subject') as HTMLInputElement).value;
-    const message = (form.elements.namedItem('message') as HTMLTextAreaElement).value;
+    const data = Object.fromEntries(new FormData(form));
 
-    const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-    const mailtoUrl = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    // Honeypot: a real user never checks this hidden box.
+    if (data.botcheck) return;
 
-    window.location.href = mailtoUrl;
+    if (!data.access_key) {
+      setStatus(
+        'The form is not configured yet. Set PUBLIC_WEB3FORMS_ACCESS_KEY, then rebuild.',
+        'error',
+      );
+      return;
+    }
+
+    setStatus('Sending…', 'pending');
+    if (submitBtn) submitBtn.disabled = true;
+
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(data),
+      });
+      const result = await res.json();
+
+      if (res.ok && result.success) {
+        form.reset();
+        setStatus(
+          "Thanks — your message is on its way. We'll reply within one business day.",
+          'success',
+        );
+      } else {
+        setStatus(
+          result.message || 'Something went wrong. Please email info@1818creative.com.',
+          'error',
+        );
+      }
+    } catch {
+      setStatus('Network error. Please email info@1818creative.com.', 'error');
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 </script>
 
@@ -176,6 +233,30 @@
   .form-group textarea {
     resize: vertical;
     min-height: 120px;
+  }
+
+  .botcheck {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .form-status {
+    margin: 1rem 0 0;
+    font-size: 0.95rem;
+    min-height: 1.4em;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .form-status[data-state='success'] {
+    color: var(--color-volt);
+  }
+
+  .form-status[data-state='error'] {
+    color: #ff9c9c;
   }
 
   .contact-form .btn {
