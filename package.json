@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.3",
+    "@portabletext/to-html": "^6",
+    "@portabletext/types": "^4",
+    "@sanity/client": "^8",
+    "@sanity/image-url": "^2",
     "astro": "^7.2.6"
   }
 }

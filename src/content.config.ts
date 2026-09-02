@@ -1,18 +1,8 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date(),
-    author: z.string().default('1818 Team'),
-    image: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    featured: z.boolean().default(false),
-  }),
-});
+// The blog now lives in Sanity (see src/sanity/ and the /admin Studio),
+// not in local Markdown files.
 
 const shop = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/shop' }),
@@ -67,7 +57,6 @@ const work = defineCollection({
 });
 
 export const collections = {
-  blog,
   shop,
   resources,
   work,
