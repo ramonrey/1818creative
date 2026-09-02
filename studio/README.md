@@ -1,7 +1,7 @@
 # 1818 Creative — Sanity Studio
 
 The blog CMS. Content is edited in the **hosted Studio** at
-`https://1818creative.sanity.studio` — writers never need this folder.
+`https://creative1818.sanity.studio` — writers never need this folder.
 
 This folder only exists so the **schema** (what fields a blog post has) is
 version-controlled. You touch it only to change the schema or redeploy the
@@ -14,7 +14,7 @@ cd studio
 npm install
 cp .env.example .env        # then paste your project id into .env
 npx sanity login            # log in with Google/GitHub
-npx sanity deploy           # publishes the Studio to 1818creative.sanity.studio
+npx sanity deploy           # publishes the Studio to creative1818.sanity.studio
 ```
 
 ## Import the existing posts (run once)

@@ -7,8 +7,12 @@ export default defineCliConfig({
   },
   /**
    * Hostname for the free hosted Studio: https://<studioHost>.sanity.studio
-   * Change this if the name is taken, then run `npx sanity deploy`.
+   * Must start with a letter (so "1818creative" isn't allowed). Change this
+   * and re-run `npx sanity deploy` to rename it.
    */
-  studioHost: '1818creative',
-  autoUpdates: true,
+  studioHost: 'creative1818',
+  deployment: {
+    appId: 'n058l9v1y4ehzse66e9dhibz',
+    autoUpdates: true,
+  },
 });

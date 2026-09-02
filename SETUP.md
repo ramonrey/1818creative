@@ -6,7 +6,7 @@ Studio), and the whole thing deploys automatically from GitHub to
 
 Do these setups once. After that the workflow is:
 
-- **Write a blog post:** go to `https://1818creative.sanity.studio`, write,
+- **Write a blog post:** go to `https://creative1818.sanity.studio`, write,
   hit Publish. A deploy hook rebuilds the site (~1 min).
 - **Change the site:** push to `main` → Cloudflare rebuilds and deploys.
 
@@ -48,7 +48,7 @@ SANITY_STUDIO_DATASET=production
 cd studio
 npm install
 npx sanity login
-npx sanity deploy        # publishes to https://1818creative.sanity.studio
+npx sanity deploy        # publishes to https://creative1818.sanity.studio
 ```
 
 (If the name `1818creative` is taken, change `studioHost` in
@@ -76,7 +76,7 @@ their images. Delete `blog-seed.ndjson` afterwards.
 ### 1e. Add writers
 
 sanity.io/manage → project → **Members** → invite by email, role **Editor**.
-They log in at `https://1818creative.sanity.studio` — nothing to install.
+They log in at `https://creative1818.sanity.studio` — nothing to install.
 
 ### 1f. Check it locally
 
