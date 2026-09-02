@@ -7,30 +7,16 @@ This folder only exists so the **schema** (what fields a blog post has) is
 version-controlled. You touch it only to change the schema or redeploy the
 Studio.
 
-## First-time setup
-
-```bash
-cd studio
-npm install
-cp .env.example .env        # then paste your project id into .env
-npx sanity login            # log in with Google/GitHub
-npx sanity deploy           # publishes the Studio to creative1818.sanity.studio
-```
-
-## Import the existing posts (run once)
-
-```bash
-npm run import-seed         # imports ../blog-seed.ndjson into the "production" dataset
-```
-
-Delete `../blog-seed.ndjson` afterwards.
+Already deployed. `.env` here holds `SANITY_STUDIO_PROJECT_ID=63ekehp8` and
+`SANITY_STUDIO_DATASET=production`.
 
 ## Changing the schema later
 
 1. Edit files in `schemaTypes/`
-2. `npx sanity deploy` to push the change to the hosted Studio
-3. If you added/renamed a field the site reads, update the GROQ query in
-   `../src/sanity/lib/queries.ts` and redeploy the site
+2. From this folder: `npm install` (first time only — large tree; `bun install`
+   is faster), then `npx sanity deploy` to push the change to the hosted Studio
+3. If you added or renamed a field the site reads, also update the GROQ query
+   in `../src/sanity/lib/queries.ts` and push to `main`
 
 ## Adding writers
 

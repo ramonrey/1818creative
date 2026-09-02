@@ -8,8 +8,7 @@
     "dev": "sanity dev",
     "start": "sanity start",
     "build": "sanity build",
-    "deploy": "sanity deploy",
-    "import-seed": "sanity dataset import ../blog-seed.ndjson production"
+    "deploy": "sanity deploy"
   },
   "dependencies": {
     "@sanity/vision": "^4",

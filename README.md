@@ -7,7 +7,8 @@ A modern, responsive website for a design and development agency built with Astr
 - ✨ Modern, minimalist design inspired by high-end agency sites
 - 📱 Fully responsive across all devices
 - ⚡ Lightning-fast performance with Astro
-- 📝 Easy-to-manage blog system
+- 📝 Blog managed in Sanity CMS (hosted Studio, no code to publish)
+- 🌗 Light / dark theme
 - 🛍️ Digital shop for selling products
 - 🎁 Free resources section
 - 🎨 Clean, maintainable code structure
@@ -20,6 +21,9 @@ A modern, responsive website for a design and development agency built with Astr
 # Install dependencies
 npm install
 
+# Set up environment variables
+cp .env.example .env      # then fill in the Sanity + Web3Forms values
+
 # Start development server
 npm run dev
 
@@ -30,34 +34,49 @@ npm run build
 npm run preview
 ```
 
-Visit `http://localhost:4321` to view the site.
+Visit `http://localhost:4321` to view the site. The blog loads from Sanity; a
+build with no `PUBLIC_SANITY_PROJECT_ID` set will show an empty blog rather
+than fail.
 
 ## Managing Content
 
-### Blog Posts
+### Blog Posts (Sanity CMS)
 
-Blog posts are stored as Markdown files in `src/content/blog/`. To add a new blog post:
+The blog is managed in **Sanity**, not in the codebase. No files, no Git, no
+build steps.
 
-1. Create a new `.md` file in `src/content/blog/`
-2. Add frontmatter with the required fields:
+**To write or edit a post:**
 
-```markdown
----
-title: "Your Post Title"
-description: "A brief description of your post"
-pubDate: 2024-02-13  # YYYY-MM-DD format
-author: "Author Name"
-image: "/images/blog/your-image.jpg"  # Optional
-tags: ["design", "development"]  # Optional
-featured: true  # Set to true to feature on blog page
----
+1. Go to **https://creative1818.sanity.studio**
+2. Log in with Google or GitHub (the account you were invited with)
+3. Click **Blog post** in the sidebar → **＋** for a new one, or pick an
+   existing post to edit
+4. Fill in the fields:
+   - **Title** – the headline
+   - **Slug** – auto-generated from the title; this is the URL
+     (`/blog/your-slug`). You can edit it.
+   - **Excerpt** – 1–2 sentences shown on the blog list and in search results
+   - **Published date** – defaults to now
+   - **Author** – defaults to "1818 Team"
+   - **Cover image** – drag in an image; add alt text
+   - **Tags** – type and press enter
+   - **Featured** – toggle on to show the post in the highlighted section at
+     the top of the blog
+   - **Body** – the article. Headings, bold/italic, links, bullet lists, and
+     inline images all work.
+5. Click **Publish**
 
-# Your Content Here
+Within about two minutes the site rebuilds itself and the post is live at
+`https://1818creative.com/blog/`. Editing or deleting a published post also
+triggers a rebuild.
 
-Write your blog post content using Markdown...
-```
+**Adding a writer:** [sanity.io/manage/project/63ekehp8](https://www.sanity.io/manage/project/63ekehp8)
+→ **Members** → invite by email, role **Editor**.
 
-3. Save the file and it will automatically appear on the blog page
+**Changing what fields a post has:** edit the schema in `studio/schemaTypes/`,
+then from the `studio/` folder run `npx sanity deploy`. If you add or rename a
+field the site reads, also update the GROQ query in
+`src/sanity/lib/queries.ts` and push.
 
 ### Digital Shop Products
 
@@ -149,17 +168,19 @@ agency-site/
 │   │   ├── Projects.astro   # Portfolio section
 │   │   └── Contact.astro    # Contact form
 │   ├── content/
-│   │   ├── blog/           # Blog posts (Markdown)
 │   │   ├── shop/           # Shop products (Markdown)
 │   │   ├── resources/      # Free resources (Markdown)
-│   │   └── config.ts       # Content collections config
+│   │   └── work/           # Portfolio projects (Markdown)
+│   ├── content.config.ts   # Content collections config (shop, resources, work)
+│   ├── sanity/
+│   │   └── lib/            # Read-only Sanity client + GROQ queries for the blog
 │   ├── layouts/
 │   │   └── Layout.astro    # Base layout
 │   ├── pages/
 │   │   ├── index.astro     # Homepage
 │   │   ├── blog/
-│   │   │   ├── index.astro        # Blog listing
-│   │   │   └── [...slug].astro   # Individual blog posts
+│   │   │   ├── index.astro        # Blog listing (fetches from Sanity)
+│   │   │   └── [...slug].astro   # Individual blog posts (fetches from Sanity)
 │   │   ├── shop/
 │   │   │   ├── index.astro        # Shop listing
 │   │   │   └── [...slug].astro   # Individual products
@@ -168,6 +189,9 @@ agency-site/
 │   │       └── [...slug].astro   # Individual resources
 │   └── styles/
 │       └── global.css      # Global styles
+├── studio/                 # Sanity Studio — blog schema only, deployed to
+│   │                       # creative1818.sanity.studio (own package.json)
+│   └── schemaTypes/
 └── package.json
 ```
 
@@ -188,9 +212,8 @@ The form in `src/components/Contact.astro` submits to [Web3Forms](https://web3fo
 1. Create a free access key at web3forms.com, entering the inbox address that
    should receive submissions.
 2. Locally: copy `.env.example` to `.env` and set `PUBLIC_WEB3FORMS_ACCESS_KEY`.
-3. In production: set the same `PUBLIC_WEB3FORMS_ACCESS_KEY` variable in the
-   host's environment settings (Cloudflare Pages / Netlify) so it is available
-   at build time.
+3. In production: it's set as a build variable on the Cloudflare Worker
+   (Workers & Pages → 1818creative → Settings → Builds → Variables).
 
 Without a key the form shows a "not configured" message instead of sending.
 A hidden `botcheck` honeypot field filters basic spam bots.
@@ -219,27 +242,33 @@ Global styles are in `src/styles/global.css`. You can customize:
 
 ## Deployment
 
-### Build for Production
+The site is hosted on **Cloudflare** (a static-assets Worker named
+`1818creative`) and deploys itself. You don't run a deploy command.
+
+- **Code change:** push to `main` → Cloudflare builds (`npm run build`) and
+  deploys, ~2 min.
+- **Blog change:** publish in Sanity → a webhook pings Cloudflare's deploy
+  hook → same build, ~2 min.
+- **Preview:** every branch and PR gets its own preview URL.
+
+Build settings (Cloudflare dashboard → Workers & Pages → 1818creative →
+Settings): build command `npm run build`, output `dist`, production branch
+`main`. Build variables: `PUBLIC_SANITY_PROJECT_ID`, `PUBLIC_SANITY_DATASET`,
+`PUBLIC_WEB3FORMS_ACCESS_KEY`.
+
+`1818creative.com` and `www` are attached as custom domains on the Worker. DNS
+is managed in Cloudflare; the domain is still registered at GoDaddy, and
+GoDaddy email is unaffected.
+
+To build locally (needs `.env` with the Sanity vars):
 
 ```bash
-npm run build
+npm run build      # -> dist/
+npm run preview     # serve dist/ locally
 ```
 
-This creates an optimized build in the `dist/` folder.
-
-### Deploy to Netlify
-
-1. Push your code to GitHub
-2. Connect your repo to Netlify
-3. Build command: `npm run build`
-4. Publish directory: `dist`
-
-### Deploy to Vercel
-
-```bash
-npm run build
-vercel --prod
-```
+See `SETUP.md` for first-time setup of the Sanity project and Cloudflare
+project from scratch.
 
 ## Support
 
