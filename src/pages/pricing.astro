@@ -13,7 +13,7 @@ const plans = [
     cadence: '/month',
     tagline: 'For businesses ready for their first professionally managed website.',
     features: [
-      'Custom-designed, mobile-responsive website',
+      'Website built from one of our simple templates, customized with your brand and content',
       'Unlimited content edits, 2 business-day turnaround',
       'Software, security and uptime monitoring',
       'Technical SEO setup and Google Analytics 4',
@@ -30,6 +30,7 @@ const plans = [
     tagline: 'Our most popular plan for growing businesses.',
     features: [
       'Everything in Build, plus:',
+      'Wider template choice with deeper customization',
       '2 hours of design and dev time each month',
       'Google Business Profile and local SEO management',
       'One optimised landing page or blog post per month',
@@ -47,6 +48,7 @@ const plans = [
     tagline: 'A complete marketing partnership for established organisations.',
     features: [
       'Everything in Grow, plus:',
+      'Fully custom design, with templates optional as a head start',
       'Monthly email newsletter, built and sent',
       'Social media management, up to 3 channels',
       'Google or Meta Ads management (ad spend billed separately)',
@@ -132,8 +134,7 @@ const addOns = [
         <p>
           Transparent pricing and flexible plans that grow with your business. Choose
           Launch, a one-time build you own outright — or a flat monthly plan covering
-          your website, hosting and unlimited updates. Move between them whenever your
-          needs change.
+          your website, hosting and unlimited updates.
         </p>
       </div>
     </section>
@@ -173,13 +174,22 @@ const addOns = [
         </div>
         <p class="plans-note">
           Extra pages beyond six are billed at the add-on rate below. Not sure
-          whether Launch or a monthly plan fits? *Clients who opt out of a maintenance plan and prefer to manage and update the website themselves will be charged $2,400. This includes full transfer of the website and all related files and access to the client <a href="/#contact">Ask us.</a>
+          whether Launch or a monthly plan fits? <a href="/#contact">Ask us.</a>
         </p>
       </div>
     </section>
 
     <section class="plans section">
       <div class="container">
+        <div class="section-header">
+          <p class="section-label">Monthly plans</p>
+          <h2>A website and everything after, for one monthly fee</h2>
+          <p class="section-description">
+            Choose one of our simple templates and we customize it with your brand
+            and content, then manage, update and market it for you. Want a fully
+            custom design? That's Launch, above.
+          </p>
+        </div>
         <div class="plans-grid">
           {plans.map((plan) => (
             <article class={`plan-card${plan.popular ? ' popular' : ''}`}>
@@ -202,8 +212,9 @@ const addOns = [
           ))}
         </div>
         <p class="plans-note">
-          Billed monthly. No long-term contracts — cancel anytime. After 12
-          months you can buy your site outright and move to Care-only.
+          Billed monthly with a 6-month minimum, then month to month. Want to
+          take your site with you? Buy it out anytime for $2,400, including a full
+          transfer of the files, hosting and domain access.
         </p>
       </div>
     </section>
@@ -571,6 +582,11 @@ const addOns = [
     text-align: center;
     max-width: 700px;
     margin: 0 auto 4rem;
+  }
+
+  .section-header p {
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .section-header .section-label {
